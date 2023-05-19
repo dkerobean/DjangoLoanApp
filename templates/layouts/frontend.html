@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+{% load static %}
+
+    {% include 'includes/frontend/head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <div class="round_spinner">
+                <div class="spinner"></div>
+                <div class="text">
+                    <img src="{% static 'img/logo/Logo-2.png' %}" alt="">
+                </div>
+            </div>
+            <h2 class="head">Did You Know?</h2>
+            <p></p>
+        </div>
+    </div>
+    <!-- Header -->
+        {% include 'includes/frontend/header.html' %}
+    <!-- Header end-->
+
+
+    
+    {% block content %}
+        
+    {% endblock content %}
+        
+
+    <!-- footer -->
+        {% include 'includes/frontend/footer.html' %}
+    <!-- footer end -->
+
+    <!-- Back to top button -->
+    <a id="back-to-top" title="Back to Top"></a>
+
+    <!-- JS here -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/preloader.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.smoothscroll.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/parallax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.parallax-scroll.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+</body>
+
+</html>
+
