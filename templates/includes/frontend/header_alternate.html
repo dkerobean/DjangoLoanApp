@@ -1,9 +1,11 @@
 {% load static %}
-<header class="header">
-        <div class="header-top py-2">
+
+<!-- Header -->
+    <header class="header">
+        <div class="header-top py-2 bg_white">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="header-info-left">
 
                             <div class="language-list">
@@ -19,11 +21,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="header-info-right">
                             <ul>
                                 <li>
-                                    <img class="img-fluid" src="{% static 'img/phone-outline-white.png' %}" alt="phone"><a
+                                    <img class="img-fluid" src="{% static 'img/phone-outline.png' %}" alt="phone"><a
                                         href="tel:01234567890">+01234-567890</a>
                                 </li>
 
@@ -37,11 +39,12 @@
                 </div>
             </div>
         </div>
-        <div class="header-menu header-menu-2" id="sticky">
+        <div class="header-menu header-menu-3" id="sticky">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container">
-                    <a class="navbar-brand" href="/">
-                        <img src="{% static 'img/logo/Logo-2.png' %}" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
+                    <a class="navbar-brand sticky_logo" href="/">
+                        <img class="main" src="{% static 'img/logo/Logo.png' %}" srcset="img/logo/Logo@2x.png 2x" alt="logo">
+                        <img class="sticky" src="{% static 'img/logo/Logo-2.png' %}" srcset="img/logo/Logo-2@2x.png 2x" alt="logo">
                     </a>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -67,7 +70,7 @@
                             </li>
                             <li class="nav-item dropdown submenu">
                                 <a class="nav-link {% if request.path == '/get_loan/' %} active {% endif %}"
-                                 href="{% url 'get-loan' %}" role="button" aria-expanded="false">
+                                    href="{% url 'get-loan' %}" role="button" aria-expanded="false">
                                     Loan
                                 </a>                                                              
                             </li>
@@ -80,9 +83,10 @@
                             </li>
                                
                         </ul>
-                        <a class="theme-btn" href="loan.html">Login / Register</a>
+                        <a class="theme-btn theme-btn-outlined_alt" href="loan.html">Login/Register </a>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
+    <!-- Header end-->
