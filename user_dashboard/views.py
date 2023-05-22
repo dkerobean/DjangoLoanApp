@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from .forms import CustomUserCreationForm
 
 
 def indexPage(request):
@@ -40,4 +41,19 @@ def loginPage(request):
 
 def registerPage(request):
     
-    return render(request, 'user_dashboard/auth/register.html')
+    form = CustomUserCreationForm()
+    
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.save()
+            messages.success(request, 'Account created successfuly')
+            login(request, user)
+            return redirect('user-home')
+        
+    context = {
+        'form':form
+    }
+    
+    return render(request, 'user_dashboard/auth/register.html', context)
