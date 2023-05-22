@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'frontend.apps.FrontendConfig', 
+    'user_dashboard.apps.UserDashboardConfig',
+    
 ]
 
 MIDDLEWARE = [

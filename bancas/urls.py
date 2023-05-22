@@ -22,4 +22,6 @@ urlpatterns = [
     
     path('', include('frontend.urls')), 
     
+    path('dashboard/', include('user_dashboard.urls')),
+    
 ]
