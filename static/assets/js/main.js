@@ -1,47 +1,26 @@
 $(function () {
-  //search
   $(document).on("keydown", (e) => {
-    switch (e.key) {
-      case "k":
-      case "Control":
-        e.preventDefault();
-        e.stopPropagation();
-        break;
-    }
-    ``;
-    if (e.key === "k" && e.ctrlKey) {
-      $("#search").trigger("focus");
-    }
-  });
-  //drawer
-  $(".drawer-btn").on("click", () => {
+  switch (e.key) {
+    case "Control":
+      e.preventDefault();
+      e.stopPropagation();
+      break;
+    default:
+      // allow other keys to be entered
+      break;
+  }
+  if (e.key === "k" && e.ctrlKey) {
+    $("#search").trigger("focus");
+  }
+  if (e.key === "b" && e.ctrlKey) {
     const checkClassExits = $(".layout-wrapper");
     if (checkClassExits.hasClass("active")) {
       checkClassExits.removeClass("active");
     } else {
       checkClassExits.addClass("active");
     }
-  });
-  //drawer key access
-  $(document).on("keydown", (e) => {
-    switch (e.key) {
-      case "b":
-      case "Control":
-        e.preventDefault();
-        e.stopPropagation();
-        break;
-    }
-    if (e.key === "b" && e.ctrlKey) {
-      const checkClassExits = $(".layout-wrapper");
-      if (checkClassExits.hasClass("active")) {
-        checkClassExits.removeClass("active");
-      } else {
-        checkClassExits.addClass("active");
-      }
-    }
-  });
+  }
 });
-
 ///Editor
 function QuillIsExists() {
   const editorOne = document.querySelector("#editor");

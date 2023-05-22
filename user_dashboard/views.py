@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect 
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
 
 
@@ -57,3 +58,11 @@ def registerPage(request):
     }
     
     return render(request, 'user_dashboard/auth/register.html', context)
+
+
+def logout(request):
+    
+    auth_logout(request)
+    return redirect('index-page')
+    
+    return render(request, 'user_dashboard/auth/login.html')
