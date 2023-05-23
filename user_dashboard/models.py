@@ -25,24 +25,25 @@ class SavingsAccount(models.Model):
         User, on_delete=models.CASCADE, related_name='savings_account')
     account_number = models.CharField(
         max_length=10, default=generate_account_number)
-    balance = models.DecimalField(max_digits=10, decimal_places=2)
-    interest_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return self.account_number
+        return f"{self.user} - {self.account_number}"
     
 class Loan(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='loans')
-    loan_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    repayment_period = models.IntegerField()
-    interest_rate = models.DecimalField(max_digits=5, decimal_places=2)
-    outstanding_balance = models.DecimalField(max_digits=10, decimal_places=2)
+    loan_amount = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
+    repayment_period = models.IntegerField(blank=True, null=True)
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    outstanding_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
     
     def __str__(self):
-        return f"Loan #{self.id}"
+        return f"Loan #{self.user}"
 
 
 class Transaction(models.Model):
