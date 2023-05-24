@@ -4,11 +4,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm
+from .models import Profile
 
 
-def indexPage(request):
+def indexPage(request, pk):
     
-    return render(request, 'user_dashboard/index.html')
+    user = Profile.objects.get(id=pk)
+    
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    context = {
+        
+        'user':user, 
+        'name':name,
+        'username':username
+    }
+    
+    return render(request, 'user_dashboard/index.html', context)
 
  
 """ AUTH """

@@ -85,7 +85,7 @@
                         </ul>
                         
                         {% if request.user.is_authenticated %}
-                            <a class="theme-btn theme-btn-outlined_alt" href="{% url 'user-home' %}">Dashboard</a>
+                            <a class="theme-btn theme-btn-outlined_alt" href="{% url 'user-home' request.user.profile.id %}">Dashboard</a>
                         {% else %}
                         <a class="theme-btn theme-btn-outlined_alt" href="{% url 'user-login' %}">Login/Register </a>
                         {% endif %}
