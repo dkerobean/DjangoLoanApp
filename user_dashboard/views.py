@@ -88,6 +88,8 @@ def logout(request):
 def edit_profile(request, pk):
     
     user_profile = Profile.objects.get(id=pk)
+    name = f"{user_profile.user.first_name} {user_profile.user.last_name}"
+    username = user_profile.user.username
     
     form = UpdateProfileForm(instance=user_profile)
     
@@ -101,7 +103,9 @@ def edit_profile(request, pk):
         
         
     context = {
-        'form':form
+        'form':form,
+        'name':name, 
+        'username':username
     }
             
     
