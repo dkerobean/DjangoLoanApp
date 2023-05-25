@@ -882,10 +882,9 @@
                       <div>
                         <ul>
                           <li class="w-full">
-                            <a href="https://spaceraceit.com/html/bankco/settings.html">
+                            <a href="{% url 'user-edit-profile' request.user.profile.id %}">
                               <div
-                                class="flex space-x-[18px] items-center p-[14px] hover:bg-bgray-100 rounded-lg text-bgray-600 hover:text-bgray-900"
-                              >
+                                class="flex space-x-[18px] items-center p-[14px] hover:bg-bgray-100 rounded-lg text-bgray-600 hover:text-bgray-900">
                                 <div class="w-[20px]">
                                   <span>
                                     <svg

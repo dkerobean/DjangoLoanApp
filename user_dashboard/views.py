@@ -3,8 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UpdateProfileForm
 from .models import Profile
+from django.contrib import messages
 
 
 def indexPage(request, pk):
@@ -45,7 +46,8 @@ def loginPage(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'Logged in succesfully')
-            return redirect('user-home')
+            user_id = request.user.profile.id
+            return redirect('user-home', user_id)
         else:
             messages.error(request, 'Username or Password incorrect')
             
@@ -79,3 +81,28 @@ def logout(request):
     return redirect('index-page')
     
     return render(request, 'user_dashboard/auth/login.html')
+
+
+""" PROFILE """
+
+def edit_profile(request, pk):
+    
+    user_profile = Profile.objects.get(id=pk)
+    
+    form = UpdateProfileForm(instance=user_profile)
+    
+    if request.method == "POST":
+        form = UpdateProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile Updated")
+            user_id = request.user.profile.id
+            return redirect('user-home', user_id)
+        
+        
+    context = {
+        'form':form
+    }
+            
+    
+    return render(request, 'user_dashboard/profile/edit_profile.html', context)
