@@ -1,0 +1,11 @@
+# Ignore pycache files
+**/__pycache__/
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+bancas/__pycache__/settings.cpython-39.pyc
+bancas/__pycache__/urls.cpython-39.pyc
+db.sqlite3
