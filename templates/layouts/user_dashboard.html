@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include 'includes/user_dashboard/head.html' %}
+
+  <body>
+    <!-- layout start -->
+    <div class="w-full layout-wrapper active">
+      <div class="w-full flex relative">
+        {% include 'includes/user_dashboard/aside.html' %}
+        <div
+          style="z-index: 25"
+          class="aside-overlay block sm:hidden w-full h-full fixed left-0 top-0 bg-black bg-opacity-30"
+        ></div>
+            {% include 'includes/user_dashboard/aside_hidden.html' %}
+        <div class="body-wrapper flex-1 overflow-x-hidden">
+          
+            {% include 'includes/user_dashboard/header.html' %}
+
+            {% block content %}{% endblock content %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- layout end -->
+    <!--scripts -->
+        {% include 'includes/user_dashboard/scripts.html' %}
+  </body>
+</html>
