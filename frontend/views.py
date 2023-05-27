@@ -12,17 +12,27 @@ def indexPage(request):
 
 def getLoan(request):
     
-    return render(request, 'frontend/get_loan.html')
+    return render(request, 'frontend/loan/get_loan.html')
 
 
 def loanApplication(request):
     
-    return render(request, 'frontend/loan_application')
+    return render(request, 'frontend/loan/loan_application')
 
 
 def loanDetails(request):
     
-    return render(request, 'frontend/loan_details.html')
+    return render(request, 'frontend/loan/loan_details.html')
+
+
+def personalDetails(request):
+    
+    return render(request, 'frontend/loan/personal_details.html')
+
+
+def documentUpload(request):
+
+    return render(request, 'frontend/loan/document_upload.html')
 
 
 """ CONTACT """

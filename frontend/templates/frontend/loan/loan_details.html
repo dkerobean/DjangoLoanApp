@@ -57,7 +57,7 @@
 
                     <div class="col-lg-9">
                         <div class="loan-details-widget bg_white">
-                            <form action="personal-details.html">
+                            <form action="{% url 'personal-details' %}">
                                 <div class="row mb-35 gy-4">
                                     <div class="col-lg-3 col-md-6">
                                         <input class="select-loan-type-radio" name="select-loan-type" type="radio"
@@ -116,10 +116,10 @@
                                         </select>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="label" for="loan-amount">Yout loan amount</label>
+                                        <label class="label" for="loan-amount">Your loan amount</label>
                                         <div class="input-field">
                                             <span>$</span>
-                                            <input type="number" id="loan-amount" class="form-control">
+                                            <input type="number" name="loan-amount" id="loan-amount" class="form-control">
                                         </div>
                                     </div>
 
