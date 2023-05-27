@@ -16,7 +16,7 @@
                                 <h1 class="wow fadeInUp">Get your loan approved in 3 steps</h1>
                             </div>
                             <a class="theme-btn theme-btn-lg theme-btn-alt mt-50 wow fadeInUp" data-wow-delay='0.2s'
-                                href="loan-details.html">
+                                href="{% url 'loan-details' %}">
                                 Get started <i class="arrow_right"></i>
                             </a>
                         </div>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="personal-details.html">
+                <form action="{% url 'loan-details' %}">
                     <div class="row">
                         <div class="col-md-10 mx-auto">
                             <div class="row pt-35  gy-lg-0 gy-3">
@@ -323,7 +323,7 @@
                                         <h4 class="mb-1">Your EMI Amount</h4>
                                         <h1 class="m-0" id="emiAmount">$ 3,495*</h1>
 
-                                        <a href="personal-details.html" class="theme-btn theme-btn-lg mt-40">Apply Now
+                                        <a href="{% url 'loan-details' %}" class="theme-btn theme-btn-lg mt-40">Apply Now
                                             <i class="arrow_right"></i></a>
                                     </div>
                                 </div>

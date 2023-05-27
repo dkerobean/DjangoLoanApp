@@ -7,6 +7,7 @@ urlpatterns = [
     
     path('get_loan/', views.getLoan, name="get-loan"),
     path('loan/', views.loanApplication, name="loan-application"),
+    path('loan_details/', views.loanDetails, name="loan-details"),
     
     path('contact/', views.contact, name="contact") 
     

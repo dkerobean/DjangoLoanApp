@@ -8,6 +8,7 @@ def indexPage(request):
     
     return render(request, 'frontend/index.html')
 
+""" LOAN """
 
 def getLoan(request):
     
@@ -18,7 +19,13 @@ def loanApplication(request):
     
     return render(request, 'frontend/loan_application')
 
-from django.contrib import messages
+
+def loanDetails(request):
+    
+    return render(request, 'frontend/loan_details.html')
+
+
+""" CONTACT """
 
 def contact(request):
     
