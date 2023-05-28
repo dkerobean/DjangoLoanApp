@@ -34,7 +34,7 @@
                     <div class="col-lg-3">
                         <div class="stepper-widget mt-sm-5 px-3 px-sm-0">
                             <ul>
-                                <li class=" complete  mt-0"><a href="loan-details.html">
+                                <li class=" complete  mt-0"><a href="#">
                                         <div class="number"><i class="icon_check"></i> <span>1</span></div> Loan
                                         Details
                                     </a>
@@ -51,28 +51,19 @@
                                         Upload
                                     </a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-lg-9">
                         <div class="loan-details-widget bg_white">
-                            <form action="{% url 'document-upload' %}">
-                                <div class="row gy-4">
-                                    <div class="col-md-6">
-                                        <label class="label" for="fName">First Name*</label>
-                                        <input id='fName' class="form-control" type="text" required>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="label" for="lName">Last Name*</label>
-                                        <input id='lName' class="form-control" type="text" required>
-                                    </div>
-
+                            <form action="{% url 'document_upload' %}">
+                                <div class="row gy-4">                                
                                     <div class="col-md-6">
                                         <label class="label" for="dob-d">Date of Birth*</label>
                                         <div class="dob d-flex">
-                                            <select id="dob-d">
+                                            <select id="dob-d" name="dob">
                                                 <option value="">Day</option>
                                                 <option value="01">01</option>
                                                 <option value="02">02</option>
@@ -186,45 +177,34 @@
                                         <label class="label mb-4">Marital Statas*</label>
 
                                         <div class="form-check form-check-inline me-5">
-                                            <input class="form-check-input" type="radio" name="MaritalStatas"
+                                            <input class="form-check-input" type="radio" name="marital-status"
                                                 id="single" value="single">
                                             <label class="form-check-label" for="single">Single</label>
                                         </div>
                                         <div class="form-check form-check-inline me-5">
-                                            <input class="form-check-input" type="radio" name="MaritalStatas"
+                                            <input class="form-check-input" type="radio" name="marital-status"
                                                 id="married" value="married">
                                             <label class="form-check-label" for="married">Married</label>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="label" for="emailName">Email</label>
-                                        <input class="form-control" type="email" id='emailName'
-                                            placeholder="examplename@example.com" required>
-                                    </div>
-
+                                    </div>                                   
                                     <div class="col-md-6">
                                         <label class="label" for="inputPhoneNumber">Mobile Number*</label>
-                                        <input id="inputPhoneNumber" class="form-control w-100" type="number">
+                                        <input id="inputPhoneNumber" class="form-control w-100" type="number" name="mobile-number">
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <label class="label" for="pAddress">Present Address*</label>
-                                        <input id="pAddress" class="form-control" type="text">
-                                    </div>
+                                        <input id="pAddress" class="form-control" type="text" name="address">
+                                    </div>                                   
 
-                                    <div class="col-md-4">
-                                        <label class="label" for="stateName">State*</label>
-                                        <input id="stateName" class="form-control" type="text">
-                                    </div>
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label class="label" for="cityName">City*</label>
-                                        <input id="cityName" class="form-control" type="text">
+                                        <input id="cityName" class="form-control" type="text" name="city">
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label class="label" for="zipCode">Postal / Zip Code*</label>
-                                        <input id="zipCode" class="form-control" type="number">
+                                        <input id="zipCode" class="form-control" type="number" name="postal-code">
                                     </div>
 
 
@@ -232,7 +212,7 @@
                                 <div class="row mt-60">
                                     <div class="col-md-12">
                                         <div class="nav-btn d-flex flex-wrap justify-content-between">
-                                            <a href="loan-details.html"
+                                            <a href="" onclick="goBack()"
                                                 class=" prev-btn theme-btn-primary_alt theme-btn"><i
                                                     class="arrow_left"></i>previous
                                             </a>
@@ -241,6 +221,11 @@
                                                     class="arrow_right"></i></button>
                                         </div>
                                     </div>
+                                    <script>
+                                        function goBack() {
+                                        window.history.back();
+                                        }
+                                    </script>
                                 </div>
                             </form>
                         </div>
