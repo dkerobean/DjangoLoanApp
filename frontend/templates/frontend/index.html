@@ -17,7 +17,7 @@
                             <p class="wow fadeInUp mt-50" data-wow-delay="0.3s">Banca is the one you can rely that will
                                 support you all the way by offering Home Loan
                                 facilities.</p>
-                            <a href="loan.html" data-wow-delay="0.5s"
+                            <a href="{% url 'get-loan' %}" data-wow-delay="0.5s"
                                 class="wow fadeInUp theme-btn theme-btn-lg mt-50">Apply
                                 now <i class="arrow_right"></i>
                             </a>
@@ -134,7 +134,7 @@
                                     <li><i class="icon_box-checked"></i>Centrelink Considered*</li>
                                     <li><i class="icon_box-checked"></i>Bad Credit Considered2</li>
                                 </ul>
-                                <a href="loan.html" class="theme-btn mt-20 w-100">Apply for loans</a>
+                                <a href="{% url 'get-loan' %}" class="theme-btn mt-20 w-100">Apply for loans</a>
                             </div>
                         </div>
                         <div class="col-xl-3 col-md-6 ">
@@ -477,7 +477,7 @@
 
                                 <div class="col-md-5 text-center text-md-end">
                                     <div class="cta-content   text-md-end mt-3 mt-md-0">
-                                        <a href="contact.html"
+                                        <a href="{% url 'contact' %}"
                                             class="theme-btn theme-btn-alt wow fadeInLeft m-0">Contact Us</a>
                                     </div>
                                 </div>
