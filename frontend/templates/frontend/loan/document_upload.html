@@ -58,7 +58,8 @@
 
                     <div class="col-md-9">
                         <div class="loan-details-widget bg_white">
-                            <form action="#">
+                            <form action="" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="row gy-4">
                                     <div class="col-12">
                                         <div class="doc-info">
