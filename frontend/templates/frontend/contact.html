@@ -90,29 +90,22 @@
                     </div>
                     <div class="col-lg-6 offset-lg-1">
                         <div class="contact-form-widget">
-                            <form action="mail.php" method="POST">
+                            <form action="{% url 'contact' %}" method="POST">
+                                {% csrf_token %}
+
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="f-name">Full Name</label>
-                                        <input type="text" id="f-name" name="name" class="form-control"
-                                            placeholder="What's your name?" required>
-                                    </div>
-                                    <div class="col-md-6 mt-20 mt-md-0">
-                                        <label for="email-address">Email</label>
-                                        <input type="email" id='email-address' name="email" class="form-control"
-                                            placeholder="yourname@example.com" required>
-                                    </div>
-                                    <div class="col-md-12 mt-20">
-                                        <label for="form-sub">Subject</label>
-                                        <input type="text" id="form-sub" name="subject" class="form-control"
-                                            placeholder="Your subject" required>
-                                    </div>
-                                    <div class="col-md-12 mt-20">
-                                        <label for="form-text">Messages</label>
-                                        <textarea cols="30" rows="5" name="message" id="form-text"
-                                            class="form-control pt-15" placeholder="Your message......"
-                                            required></textarea>
-                                    </div>
+                                    {% for field in form %}
+                                        <div class="col-md-12">
+                                        <label for="f-name">{{field.label}}</label>
+                                            {{field}}
+                                        </div>
+
+                                        {% for error in field.errors %}
+                                            <p style="color:red;">{{error}}</p>
+                                        {% endfor %}
+                                        
+                                    {% endfor %}
+                                    
                                     <div class="col-12 mt-3">
                                         <p class="policy-text">
                                             By submitting this form you consent to us emailing you occasionally about

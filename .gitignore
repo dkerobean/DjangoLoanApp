@@ -5,3 +5,12 @@
 *.pyc
 *.pyo
 *.pyd
+
+bancas/__pycache__/settings.cpython-39.pyc
+bancas/__pycache__/urls.cpython-39.pyc
+<<<<<<< HEAD
+db.sqlite3
+
+=======
+db.sqlite3
+>>>>>>> feature/frontend

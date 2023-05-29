@@ -15,10 +15,10 @@
                             <div class="section-title">
                                 <h1 class="wow fadeInUp">Get your loan approved in 3 steps</h1>
                             </div>
-                            <a class="theme-btn theme-btn-lg theme-btn-alt mt-50 wow fadeInUp" data-wow-delay='0.2s'
-                                href="loan-details.html">
+                            {% comment %} <a class="theme-btn theme-btn-lg theme-btn-alt mt-50 wow fadeInUp" data-wow-delay='0.2s'
+                                href="{% url 'loan-details' %}">
                                 Get started <i class="arrow_right"></i>
-                            </a>
+                            </a> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -69,11 +69,11 @@
                         </div>
                     </div>
                 </div>
-                <form action="personal-details.html">
+                <form action="{% url 'loan-details' %}">
                     <div class="row">
                         <div class="col-md-10 mx-auto">
                             <div class="row pt-35  gy-lg-0 gy-3">
-                                <div class="col-lg-4">
+                                {% comment %} <div class="col-lg-4">
                                     <div class="loan-apply-widget wow fadeInRight" data-wow-delay="0.1s">
                                         <div class="icon">
                                             <img src="{% static 'img/apply-loan/icon-1.1.png' %}" alt="icon-1">
@@ -81,7 +81,7 @@
                                         </div>
                                         <div class="apply-content">
                                             <span class="title">How much do you need?</span>
-                                            <p class="d-flex">$ <input class="w-100" type="text" value="5,000"> </p>
+                                            <p class="d-flex">$ <input class="w-100" type="text" value="5,000" name="loan-amount"> </p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,14 +96,14 @@
                                             <select name="select-loan-type" id="select-loan-type">
                                                 <option>Select your Loan</option>
                                                 <option value="Home Loan">Home Loan</option>
-                                                <option value="Loan Against Property">Loan Against Property</option>
-                                                <option value="Loan Renovation">Loan Renovation</option>
-                                                <option value="Commercial Property">Commercial Property</option>
+                                                <option value="Loan Against Property">Personal Loan</option>
+                                                <option value="Loan Renovation">Business Loan</option>
+                                                <option value="Commercial Property">Car Loan</option>
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
+                                </div> {% endcomment %}
+                                {% comment %} <div class="col-lg-4">
                                     <div class="loan-apply-widget wow fadeInRight" data-wow-delay="0.5s">
                                         <div class="icon">
                                             <img src="{% static 'img/apply-loan/icon-3.1.png' %}" alt="icon-3">
@@ -113,84 +113,11 @@
                                             <span class="title">Where do you currently live?</span>
                                             <div class="select-location d-flex align-items-center"
                                                 id="locationSlectParent">
-                                                <select class="w-100" name="select-location" id="locationSelect">
-                                                    <option value="Bagerhat">Bagerhat</option>
-                                                    <option value="Bandarban" selected>Bandarban</option>
-                                                    <option value="Barguna">Barguna</option>
-                                                    <option value="Barisal">Barisal</option>
-                                                    <option value="Bhola">Bhola</option>
-                                                    <option value="Barishal Metro">Barishal Metro</option>
-                                                    <option value="Bogra">Bogra</option>
-                                                    <option value="Brahmmanbaria">Brahmmanbaria</option>
-                                                    <option value="Chandpur">Chandpur</option>
-                                                    <option value="Chapai Nawabganj">Chapai Nawabganj</option>
-                                                    <option value="Chittagong">Chittagong</option>
-                                                    <option value="Chuadanga">Chuadanga</option>
-                                                    <option value="Chottogram Metro">Chottogram Metro</option>
-                                                    <option value="Cox&#039;s Bazar">Cox&#039;s Bazar</option>
-                                                    <option value="Coxsbazar">Coxsbazar</option>
-                                                    <option value="Cumilla">Cumilla</option>
-                                                    <option value="Dhaka">Dhaka</option>
-                                                    <option value="Dinajpur">Dinajpur</option>
-                                                    <option value="Dhaka Metro">Dhaka Metro</option>
-                                                    <option value="Faridpur">Faridpur</option>
-                                                    <option value="Feni">Feni</option>
-                                                    <option value="Gaibandha">Gaibandha</option>
-                                                    <option value="Gazipur">Gazipur</option>
-                                                    <option value="Gazipur Metro">Gazipur Metro</option>
-                                                    <option value="Gopalgonj">Gopalgonj</option>
-                                                    <option value="Habigonj">Habigonj</option>
-                                                    <option value="Jaflong">Jaflong</option>
-                                                    <option value="Jamalpur">Jamalpur</option>
-                                                    <option value="Jessore">Jessore</option>
-                                                    <option value="Jhalokathi">Jhalokathi</option>
-                                                    <option value="Jhenaidah">Jhenaidah</option>
-                                                    <option value="Joypurhat">Joypurhat</option>
-                                                    <option value="Khagrachari">Khagrachari</option>
-                                                    <option value="Khulna">Khulna</option>
-                                                    <option value="Kishoregonj">Kishoregonj</option>
-                                                    <option value="Khulna Metro">Khulna Metro</option>
-                                                    <option value="Kurigram">Kurigram</option>
-                                                    <option value="Kustia">Kustia</option>
-                                                    <option value="Lalmonirhat">Lalmonirhat</option>
-                                                    <option value="Laxmipur">Laxmipur</option>
-                                                    <option value="Madaripur">Madaripur</option>
-                                                    <option value="Magura">Magura</option>
-                                                    <option value="Manikgonj">Manikgonj</option>
-                                                    <option value="Meherpur">Meherpur</option>
-                                                    <option value="Moulabhibazar">Moulabhibazar</option>
-                                                    <option value="Munshigonj">Munshigonj</option>
-                                                    <option value="Mymensingh">Mymensingh</option>
-                                                    <option value="Naogaon">Naogaon</option>
-                                                    <option value="Narail">Narail</option>
-                                                    <option value="Narayangonj">Narayangonj</option>
-                                                    <option value="Narsingdi">Narsingdi</option>
-                                                    <option value="Natore">Natore</option>
-                                                    <option value="Netrokona">Netrokona</option>
-                                                    <option value="Nilphamari">Nilphamari</option>
-                                                    <option value="Noakhali">Noakhali</option>
-                                                    <option value="Pabna">Pabna</option>
-                                                    <option value="Panchagarh">Panchagarh</option>
-                                                    <option value="Patuakhali">Patuakhali</option>
-                                                    <option value="Pirojpur">Pirojpur</option>
-                                                    <option value="Rajbari">Rajbari</option>
-                                                    <option value="Rajshahi">Rajshahi</option>
-                                                    <option value="Rangamati">Rangamati</option>
-                                                    <option value="Rangpur">Rangpur</option>
-                                                    <option value="Rajshahi Metro ">Rajshahi Metro </option>
-                                                    <option value="Rangpur Metro ">Rangpur Metro </option>
-                                                    <option value="Saint Martin">Saint Martin</option>
-                                                    <option value="Satkhira">Satkhira</option>
-                                                    <option value="Shariatpur">Shariatpur</option>
-                                                    <option value="Sherpur">Sherpur</option>
-                                                    <option value="Sirajgonj">Sirajgonj</option>
-                                                    <option value="Sylhet Metro">Sylhet Metro</option>
-                                                    <option value="Srimangal">Srimangal</option>
-                                                    <option value="Sunamgonj">Sunamgonj</option>
-                                                    <option value="Sylhet">Sylhet</option>
-                                                    <option value="Tangail">Tangail</option>
-                                                    <option value="Teknaf">Teknaf</option>
-                                                    <option value="Thakurgaon">Thakurgaon</option>
+                                                <select class="w-100" name="select-location" id="locationSelect">                                                
+                                                    <option value="Sylhet">Ghana</option>
+                                                    <option value="Tangail">Nigeria</option>
+                                                    <option value="Teknaf">Togo</option>
+                                                    <option value="Thakurgaon">USA</option>
                                                 </select>
                                                 <span class="close" id="readOnlyClose">
                                                     <i class="icon_close"></i>
@@ -198,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
 
                                 <div class="col-12 mt-15 d-flex wow fadeInLeft">
                                     <div class="icon">
@@ -323,7 +250,7 @@
                                         <h4 class="mb-1">Your EMI Amount</h4>
                                         <h1 class="m-0" id="emiAmount">$ 3,495*</h1>
 
-                                        <a href="personal-details.html" class="theme-btn theme-btn-lg mt-40">Apply Now
+                                        <a href="{% url 'loan-details' %}" class="theme-btn theme-btn-lg mt-40">Apply Now
                                             <i class="arrow_right"></i></a>
                                     </div>
                                 </div>

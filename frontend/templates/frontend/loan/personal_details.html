@@ -1,0 +1,128 @@
+{% extends 'layouts/frontend_alternate.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+    <main>
+        <!-- BreadCrumb start -->
+        <section class="breadcrumb-area">
+            <div class="breadcrumb-widget  pt-200 pb-100" style="background-image: url(img/breadcrumb/bg-1.png);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="breadcrumb-content pt-95">
+                                <h1>Personal Details</h1>
+                                <ul>
+                                    <li><a href="index.html">home</a></li>
+                                    <li><a href="index.html">pages</a></li>
+                                    <li>loan</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- BreadCrumb end -->
+
+        <!-- Persinal Details start -->
+        <section class="loan-deatils-area bg_disable pt-130 pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="stepper-widget mt-sm-5 px-3 px-sm-0">
+                            <ul>
+                                <li class=" complete  mt-0"><a href="#">
+                                        <div class="number"><i class="icon_check"></i> <span>1</span></div> Loan
+                                        Details
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">
+                                        <div class="number"><i class="icon_check"></i> <span>2</span></div>
+                                        Personal
+                                        Details
+                                    </a>
+                                </li>
+                                <li><a href="">
+                                        <div class="number"><i class="icon_check"></i> <span>3</span></div>
+                                        Documants
+                                        Upload
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="loan-details-widget bg_white">
+                            <form action="{% url 'personal-details' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row gy-4">                                
+                                    <div class="col-md-6">
+                                        <label class="label" for="inputPhoneNumber">Date of Birth*</label>
+                                        <input id="datepicker" class="form-control w-100" type="text" name="dob">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="label mb-4">Marital Statas*</label>
+
+                                        <div class="form-check form-check-inline me-5">
+                                            <input class="form-check-input" type="radio" name="marital-status"
+                                                id="single" value="single">
+                                            <label class="form-check-label" for="single">Single</label>
+                                        </div>
+                                        <div class="form-check form-check-inline me-5">
+                                            <input class="form-check-input" type="radio" name="marital-status"
+                                                id="married" value="married">
+                                            <label class="form-check-label" for="married">Married</label>
+                                        </div>
+                                    </div>                                   
+                                    <div class="col-md-6">
+                                        <label class="label" for="inputPhoneNumber">Mobile Number*</label>
+                                        <input id="inputPhoneNumber" class="form-control w-100" type="number" name="mobile-number">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="label" for="pAddress">Present Address*</label>
+                                        <input id="pAddress" class="form-control" type="text" name="address">
+                                    </div>                                   
+
+                                    <div class="col-md-6">
+                                        <label class="label" for="cityName">City*</label>
+                                        <input id="cityName" class="form-control" type="text" name="city">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="label" for="zipCode">Postal / Zip Code*</label>
+                                        <input id="zipCode" class="form-control" type="number" name="postal-code">
+                                    </div>
+
+
+                                </div>
+                                <div class="row mt-60">
+                                    <div class="col-md-12">
+                                        <div class="nav-btn d-flex flex-wrap justify-content-between">
+                                            <a onclick="goBack()"
+                                                class=" prev-btn theme-btn-primary_alt theme-btn"><i
+                                                    class="arrow_left"></i>previous
+                                            </a>
+                                            <button type="submit"
+                                                class=" next-btn theme-btn-primary_alt theme-btn ">next<i
+                                                    class="arrow_right"></i></button>
+                                        </div>
+                                    </div>                                   
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Persinal Details end -->
+    </main>
+
+{% endblock content %}
+    
