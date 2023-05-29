@@ -58,7 +58,7 @@
 
                     <div class="col-lg-9">
                         <div class="loan-details-widget bg_white">
-                            <form action="{% url 'document_upload' %}" method="POST">
+                            <form action="{% url 'personal-details' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="row gy-4">                                
                                     <div class="col-md-6">
@@ -66,7 +66,7 @@
                                         <div class="dob d-flex">
                                             <select id="dob-d" name="dob">
                                                 <option value="">Day</option>
-                                                <option value="01">01</option>
+                                                <option value="1997-09-27">1997-09-27</option>
                                                 <option value="02">02</option>
                                                 <option value="03">03</option>
                                                 <option value="04">04</option>
@@ -99,7 +99,7 @@
                                                 <option value="31">31</option>
                                             </select>
 
-                                            <select id="dob-m">
+                                            <select id="dob-m" >
                                                 <option value="">Month</option>
                                                 <option value="01">January</option>
                                                 <option value="02">February</option>
@@ -115,7 +115,7 @@
                                                 <option value="12">December</option>
                                             </select>
 
-                                            <select class="me-0" id="dob-y">
+                                            <select class="me-0" id="dob-y" >
                                                 <option value="">Year</option>
 
                                                 <option value="1970">1970</option>
