@@ -201,7 +201,7 @@
                   </div>
                 </div>
                 <!-- revenue, flow -->
-                <div class="w-full mb-[24px] xl:flex xl:space-x-[24px]">
+                {% comment %} <div class="w-full mb-[24px] xl:flex xl:space-x-[24px]">
                   <div
                     class="xl:w-66 w-full bg-white flex flex-col justify-between rounded-lg px-[24px] py-3"
                   >
@@ -475,7 +475,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> {% endcomment %}
                 <!--list table-->
                 <div class="w-full py-[20px] px-[24px] rounded-lg bg-white">
                   <div class="flex flex-col space-y-5">
@@ -1454,7 +1454,7 @@
                 <div
                   class="2xl:w-full lg:w-1/2 w-full rounded-lg bg-white px-[42px] py-5 2xl:mb-6 lg:mb-0 mb-6"
                 >
-                  <div class="my-wallet w-full mb-8">
+                  {% comment %} <div class="my-wallet w-full mb-8">
                     <div class="flex justify-between items-center mb-3">
                       <h3 class="text-lg font-bold text-bgray-900">
                         My Wallet
@@ -1463,29 +1463,25 @@
                       <div class="payment-select relative mb-3">
                         <button
                           onclick="dateFilterAction('#cardsOptions')"
-                          type="button"
-                        >
+                          type="button">
                           <svg
                             width="18"
                             height="4"
                             viewBox="0 0 18 4"
                             fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                               d="M8 2C8 2.55228 8.44772 3 9 3C9.55228 3 10 2.55228 10 2C10 1.44772 9.55228 1 9 1C8.44772 1 8 1.44772 8 2Z"
                               stroke="#CBD5E0"
                               stroke-width="2"
                               stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
+                              stroke-linejoin="round"/>
                             <path
                               d="M1 2C1 2.55228 1.44772 3 2 3C2.55228 3 3 2.55228 3 2C3 1.44772 2.55228 1 2 1C1.44772 1 1 1.44772 1 2Z"
                               stroke="#CBD5E0"
                               stroke-width="2"
                               stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
+                              stroke-linejoin="round"/>
                             <path
                               d="M15 2C15 2.55228 15.4477 3 16 3C16.5523 3 17 2.55228 17 2C17 1.44772 16.5523 1 16 1C15.4477 1 15 1.44772 15 2Z"
                               stroke="#CBD5E0"
@@ -1544,10 +1540,10 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="w-full">
                     <h3 class="text-lg font-bold text-bgray-900 mb-4">
-                      Quick Transfer
+                      My Wallet
                     </h3>
                     <div class="payment-select relative mb-3">
                       <button
@@ -1563,12 +1559,12 @@
                             />
                           </span>
                           <span class="text-sm font-medium text-bgray-900"
-                            >Debit</span
+                            >Account Balance</span
                           >
                         </div>
                         <div class="flex space-x-2 items-center">
                           <span class="text-sm font-bold text-bgray-900">
-                            $10,431
+                            1{{user.user.savings_account.balance}}
                           </span>
                           <span class="text-sm font-medium text-bgray-900">
                             <svg
@@ -1641,204 +1637,7 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  class="2xl:w-full lg:w-1/2 w-full rounded-lg bg-white flex flex-col justify-between"
-                >
-                  <div
-                    class="px-[26px] py-6 border-b border-bgray-300 flex justify-between"
-                  >
-                    <h1 class="text-2xl font-semibold text-bgray-900">
-                      Team Chat
-                    </h1>
-                    <div class="flex space-x-3 items-center">
-                      <div>
-                        <img
-                          src="{% static 'assets/images/avatar/members-3.png' %}"
-                          alt="members"
-                        />
-                      </div>
-                      <button
-                        type="button"
-                        class="w-[36px] h-[36px] rounded-full bg-bgray-200 flex justify-center items-center"
-                      >
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M7.75 1C7.75 0.585786 7.41421 0.25 7 0.25C6.58579 0.25 6.25 0.585786 6.25 1V6.25H1C0.585786 6.25 0.25 6.58579 0.25 7C0.25 7.41421 0.585786 7.75 1 7.75H6.25V13C6.25 13.4142 6.58579 13.75 7 13.75C7.41421 13.75 7.75 13.4142 7.75 13V7.75H13C13.4142 7.75 13.75 7.41421 13.75 7C13.75 6.58579 13.4142 6.25 13 6.25H7.75V1Z"
-                            fill="#718096"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="lg:px-[35px] px-5 lg:py-[38px] py-6 w-full">
-                    <div class="flex flex-col space-y-[32px] mb-5">
-                      <div class="flex justify-start">
-                        <div class="flex space-x-3 items-end">
-                          <div class="flex space-x-2 items-center">
-                            <div
-                              class="w-[36px] h-[35px] rounded-full overflow-hidden"
-                            >
-                              <img
-                                src="{% static 'assets/images/avatar/user-1.png' %}"
-                                alt="avater"
-                                class="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div class="p-3 bg-bgray-100 rounded-lg">
-                              <p class="text-bgray-900 text-sm font-medium">
-                                Hi, What can I help you with?
-                              </p>
-                            </div>
-                          </div>
-                          <span class="text-bgray-500 text-xs font-medium"
-                            >10:00 PM</span
-                          >
-                        </div>
-                      </div>
-                      <div class="flex justify-start">
-                        <div class="flex space-x-3 items-end">
-                          <div class="flex space-x-2 items-center">
-                            <div
-                              class="w-[36px] h-[35px] rounded-full overflow-hidden"
-                            >
-                              <img
-                                src="{% static 'assets/images/avatar/user-1.png' %}"
-                                alt="avater"
-                                class="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div>
-                              <img
-                                src="{% static 'assets/images/others/mp3.png' %}"
-                                alt="mp3"
-                              />
-                            </div>
-                          </div>
-                          <span class="text-bgray-500 text-xs font-medium"
-                            >10:00 PM</span
-                          >
-                        </div>
-                      </div>
-                      <div class="flex justify-end">
-                        <div class="flex space-x-3 items-end">
-                          <span class="text-bgray-500 text-xs font-medium"
-                            >10:00 PM</span
-                          >
-                          <div class="flex space-x-2 items-center">
-                            <div
-                              class="p-3 bg-bgray-900 rounded-l-lg rounded-b-lg"
-                            >
-                              <p class="text-white text-sm font-medium">
-                                Hi, What can I help you with?
-                              </p>
-                            </div>
-                            <div
-                              class="w-[36px] h-[35px] rounded-full overflow-hidden"
-                            >
-                              <img
-                                src="{% static 'assets/images/avatar/user-1.png' %}"
-                                alt="avater"
-                                class="w-full h-full object-cover"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="flex justify-start">
-                        <div class="flex space-x-3 items-end">
-                          <div class="flex space-x-2 items-center">
-                            <div
-                              class="w-[36px] h-[35px] rounded-full overflow-hidden"
-                            >
-                              <img
-                                src="{% static 'assets/images/avatar/user-1.png' %}"
-                                alt="avater"
-                                class="w-full h-full object-cover"
-                              />
-                            </div>
-                            <div class="p-3 bg-bgray-100 rounded-lg">
-                              <p class="text-bgray-900 text-sm font-medium">
-                                Hi, What can I help you with?
-                              </p>
-                            </div>
-                          </div>
-                          <span class="text-bgray-500 text-xs font-medium"
-                            >10:00 PM</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-full h-[58px] flex space-x-4 items-center">
-                      <div
-                        class="lg:w-[318px] w-full h-full border border-transparent focus-within:border-success-300 bg-bgray-100 rounded-lg px-5 flex justify-between items-center"
-                      >
-                        <span>
-                          <svg
-                            width="15"
-                            height="16"
-                            viewBox="0 0 15 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M9.66652 4.1112L5.22208 8.55565C4.60843 9.1693 4.60843 10.1642 5.22208 10.7779C5.83573 11.3915 6.83065 11.3915 7.4443 10.7779L11.8887 6.33343C13.116 5.10613 13.116 3.11628 11.8887 1.88898C10.6614 0.661681 8.6716 0.661681 7.4443 1.88898L2.99985 6.33343C1.1589 8.17438 1.1589 11.1591 2.99985 13.0001C4.8408 14.841 7.82557 14.841 9.66652 13.0001L14.111 8.55565"
-                              stroke="#CBD5E0"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </span>
-                        <label class="w-full">
-                          <input
-                            type="text"
-                            placeholder="Type your Message..."
-                            class="w-full bg-bgray-100 pl-[15px] p-0 focus:outline-none border-none focus:ring-0 placeholder:text-sm font-medium placeholder:text-bgray-400 placeholder:font-medium"
-                          />
-                        </label>
-                        <span>
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M19 11V12C19 15.866 15.866 19 12 19M5 11V12C5 15.866 8.13401 19 12 19M12 19V22M12 22H15M12 22H9M12 16C9.79086 16 8 14.2091 8 12V6C8 3.79086 9.79086 2 12 2C14.2091 2 16 3.79086 16 6V12C16 14.2091 14.2091 16 12 16Z"
-                              stroke="#A0AEC0"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <button type="button">
-                        <svg
-                          width="20"
-                          height="18"
-                          viewBox="0 0 20 18"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M17.3894 0H2.61094C0.339326 0 -0.844596 2.63548 0.696196 4.26234L3.78568 7.52441C4.23 7.99355 4.47673 8.60858 4.47673 9.24704V15.4553C4.47673 17.8735 7.61615 18.9233 9.13941 17.0145L19.4463 4.09894C20.7775 2.43071 19.5578 0 17.3894 0Z"
-                            fill="#22C55E"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                
               </section>
             </div>
             <!-- write your code here-->
