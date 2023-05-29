@@ -71,6 +71,7 @@ def personalDetails(request):
 def documentUpload(request):
     
     if request.method == "POST":
+        
         id_proof = request.FILES.get('id-proof')
 
         # Get previous data from session
@@ -104,8 +105,7 @@ def documentUpload(request):
             return redirect('index-page')
         else:
             messages.error(request, "Please fill in all the required details.")
-    else:
-        messages.error(request, "Please upload id proof.")
+    
         
    
 

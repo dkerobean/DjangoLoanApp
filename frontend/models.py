@@ -32,7 +32,7 @@ class LoanApplication(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     loan_type = models.CharField(max_length=50)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=15, decimal_places=2)
     duration = models.IntegerField()
     finance_type = models.CharField(
         max_length=20, choices=LOAN_FINANCE_TYPE, default='credit')
