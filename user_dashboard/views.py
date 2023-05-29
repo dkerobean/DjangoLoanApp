@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
-from .models import Profile
+from .models import Profile, Support
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -88,7 +88,6 @@ def logout(request):
 
 """ PROFILE """
 
-
 @login_required(login_url="user-login")
 def edit_profile(request, pk):
     
@@ -114,3 +113,33 @@ def edit_profile(request, pk):
     }
             
     return render(request, 'user_dashboard/profile/edit_profile.html', context)
+
+
+""" SUPPORT """
+
+@login_required(login_url="user-login")
+def support(request, pk):
+    
+    user = Profile.objects.get(id=pk)
+    user_id = user.user.id
+    user_instance = User.objects.get(id=user_id)
+    
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        
+        support_ticket = Support.objects.create(user=user_instance, title=title, description=description)
+        support_ticket.save()
+        messages.success(request, 'Ticket submited successfully')
+        profile_id = user.id
+        return redirect('user-home', profile_id)
+    
+    context = {
+        'name':name,
+        'username':username
+    }
+    
+    return render(request, 'user_dashboard/support/support.html', context)
