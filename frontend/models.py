@@ -32,7 +32,7 @@ class LoanApplication(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     loan_type = models.CharField(max_length=50)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=15, decimal_places=2)
     duration = models.IntegerField()
     finance_type = models.CharField(
         max_length=20, choices=LOAN_FINANCE_TYPE, default='credit')
@@ -43,7 +43,7 @@ class LoanApplication(models.Model):
     country = models.CharField(max_length=150)
     city = models.CharField(max_length=50)
     postal_code = models.IntegerField()
-    id_card = models.ImageField(upload_to='ids/')
+    id_card = models.ImageField(upload_to='ids/', null=True, blank=True)
     status = models.CharField(max_length=20, choices=LOAN_STATUS_CHOICES, default='pending') 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

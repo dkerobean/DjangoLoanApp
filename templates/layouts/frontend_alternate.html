@@ -52,7 +52,10 @@
     <script type="text/javascript" src="{% static 'js/jquery-editable-select.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/dropzone.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- JavaScript libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- toastr message -->
     {% if messages %}
@@ -62,6 +65,19 @@
         </script>
       {% endfor %}
     {% endif %}
+
+    <script>
+    // Initialize flatpickr
+    flatpickr("#datepicker", {
+        // Specify options if needed
+    });
+    </script>
+
+    <script>
+    function goBack() {
+        window.history.back();
+    }
+    </script>
 
 </body>
 
