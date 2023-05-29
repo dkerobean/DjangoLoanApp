@@ -6,8 +6,10 @@ from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
 from .models import Profile
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="user-login")
 def indexPage(request, pk):
     
     user = Profile.objects.get(id=pk)
@@ -75,6 +77,7 @@ def registerPage(request):
     return render(request, 'user_dashboard/auth/register.html', context)
 
 
+@login_required(login_url="user-login")
 def logout(request):
     
     auth_logout(request)
@@ -85,6 +88,8 @@ def logout(request):
 
 """ PROFILE """
 
+
+@login_required(login_url="user-login")
 def edit_profile(request, pk):
     
     user_profile = Profile.objects.get(id=pk)
@@ -108,5 +113,4 @@ def edit_profile(request, pk):
         'username':username
     }
             
-    
     return render(request, 'user_dashboard/profile/edit_profile.html', context)
