@@ -1438,8 +1438,7 @@
               <section class="2xl:w-[400px] w-full flex flex-col lg:flex-row 2xl:space-x-0 2xl:flex-col lg:space-x-6 space-x-0">
                 
               <div class="2xl:w-full lg:w-1/2 w-full rounded-lg bg-white px-[42px] py-5 2xl:mb-6 lg:mb-0 mb-6">
-                <form method="POST" id="paymentForm">
-                    {% csrf_token %}
+                
                       <div class="w-full">
                     <h3 class="text-lg font-bold text-bgray-900 mb-4">
                       Account Top Up 
@@ -1455,11 +1454,11 @@
                               src="{% static 'assets/images/payments/master-mini.svg' %}"
                               alt="master"/>
                           </span>
-                          <span class="text-sm font-medium text-bgray-900">Account Balance</span>
+                          <span class="text-sm font-medium text-bgray-900">Confirm Payment for</span>
                         </div>
                         <div class="flex space-x-2 items-center">
                           <span class="text-sm font-bold text-bgray-900">
-                            {{user.user.savings_account.balance}}
+                            {{amount}}
                           </span>
                           <span class="text-sm font-medium text-bgray-900">
                             
@@ -1469,26 +1468,36 @@
                       
                     </div>
                     
-                    <div class="w-full rounded-lg border border-bgray-200 focus-within:border-success-300 p-4 h-[98px] flex flex-col justify-between">
-                      <p class="text-sm text-bgray-600 font-medium">
-                        Enter amount
-                      </p>
-                      <div class="w-full h-[35px] flex justify-between items-center">
-                        <span class="text-2xl text-bgray-900 font-bold">₵ </span>
-                        <label class="w-full">
-                          <input
-                            type="number" name="amount" id="amount" required
-                            class="focus:outline-none w-full p-0 focus:ring-0 border-none text-2xl font-bold text-bgray-900"                          
-                          />
-                        </label>
-                      </div>
-                    </div>
+                    
                     
                     <button type="submit" onclick="payWithPaystack()" class="bg-success-300 hover:bg-success-400 transition-all text-white py-4 w-full font-bold rounded-lg mt-10">
                       Add Money
                   </button>
                   </div>
-                </form>
+                
+                <script>
+                    var paymentForm = document.getElementById('paymentForm');
+                    paymentForm.addEventListener('submit', payWithPaystack, false);
+                    function payWithPaystack() {
+                        var handler = PaystackPop.setup({
+                        key: '{{ paystack_public_key }}', // Replace with your public key
+                        email: '{{email}}',
+                        amount: '{{amount}}' * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
+                        currency: 'GHS', // Use GHS for Ghana Cedis or USD for US Dollars
+                        ref: '{{reference}}', // Replace with a reference you generated
+                        callback: function(response) {
+                            //this happens after the payment is completed successfully
+                            var reference = response.reference;
+                            alert('Payment complete! Reference: ' + reference);
+                            // Make an AJAX call to your server with the reference to verify the transaction
+                        },
+                        onClose: function() {
+                            alert('Transaction was not completed, window closed.');
+                        },
+                        });
+                        handler.openIframe();
+                    }
+                </script>
                                
               </div>
                 

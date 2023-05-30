@@ -4,24 +4,61 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
-from .models import Profile, Support
+from .models import Profile, Support, Transaction
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .utils import generate_reference
+from django.conf import settings
+
+
 
 
 @login_required(login_url="user-login")
 def indexPage(request, pk):
     
     user = Profile.objects.get(id=pk)
+    user_instance = request.user
     
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
+    
+    amount = None 
+    email = None
+    reference = None
+    paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
+    
+    #Paystack Deposit money
+    if request.method == "POST":
+        amount = int(request.POST['amount'])
+        email = user.user.email
+        transaction_type = 'Deposit'
+        reference = generate_reference()
+
+        # create a Transaction
+        transaction = Transaction.objects.create(
+            user=user_instance, amount=amount, transaction_type=transaction_type, reference=reference)
+        
+        context = {
+            'amount':amount, 
+            'email':email, 
+            'reference':reference, 
+            'paystack_public_key': paystack_public_key
+        }
+        
+        messages.warning(request, 'Payment being processed')
+        return render(request, 'user_dashboard/confirm_payment.html', context)
+    
     
     context = {
         
         'user':user, 
         'name':name,
-        'username':username
+        'username':username, 
+        
+        'amount':amount, 
+        'email':email, 
+        'reference':reference, 
+        'paystack_public_key': paystack_public_key
     }
     
     return render(request, 'user_dashboard/index.html', context)
@@ -143,3 +180,6 @@ def support(request, pk):
     }
     
     return render(request, 'user_dashboard/support/support.html', context)
+
+
+""" PAYSTACK """

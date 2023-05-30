@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'allauth',
     'allauth.account',
+    'paystack'
     
 ]
 
@@ -170,5 +171,10 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '3d9a83f9d25d3274735b9c4ee8079fb4'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '423067094344-7darv1in5lqlfnsb5m9nbf2gv0ql948g.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+PAYSTACK_SECRET_KEY = 'sk_test_4e5aebb91025fae9010955aecdee4a0633690fb2'
+PAYSTACK_PUBLIC_KEY = 'pk_test_5d771c071afa4a41656e20bc1780d18fdc05d728'
+# PAYSTACK_PAYMENT_URL = 'https://api.paystack.co'
 
 

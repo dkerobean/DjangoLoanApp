@@ -49,12 +49,15 @@ class Loan(models.Model):
 class Transaction(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='transactions')
-    account = models.ForeignKey(
-        SavingsAccount, on_delete=models.CASCADE, related_name='transactions')
+    # account = models.ForeignKey(
+    #     SavingsAccount, on_delete=models.CASCADE, 
+    #                         blank=True, null=True, related_name='transactions')
     loan = models.ForeignKey(Loan, on_delete=models.CASCADE,
                              blank=True, null=True, related_name='transactions')
     transaction_type = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    reference = models.CharField(max_length=255, blank=True, null=True)
+    verified = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                             primary_key=True, editable=False)
