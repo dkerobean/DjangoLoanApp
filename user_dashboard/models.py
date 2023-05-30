@@ -32,7 +32,7 @@ class SavingsAccount(models.Model):
         return f"{self.user} - {self.account_number}"
     
 class Loan(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='loans')
     loan_amount = models.DecimalField(
         max_digits=10, decimal_places=2, default=0)

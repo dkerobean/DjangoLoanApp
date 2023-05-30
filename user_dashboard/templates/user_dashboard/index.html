@@ -23,23 +23,17 @@
                               />
                             </span>
                           </div>
-                          <span class="text-lg text-bgray-900 font-semibold"
-                            >Total earnings</span
+                          <span class="text-lg text-bgray-900 font-semibold"> Balance</span
                           >
                         </div>
                         <div>
-                          <img
-                            src="{% static 'assets/images/avatar/members-2.png' %}"
-                            alt="members"
-                          />
                         </div>
                       </div>
                       <div class="flex justify-between items-end">
                         <div class="flex-1">
                           <p
-                            class="text-bgray-900 font-bold text-3xl leading-[48px]"
-                          >
-                            $7,245.00
+                            class="text-bgray-900 font-bold text-3xl leading-[48px]">
+                             ₵{{user.user.savings_account.balance}}
                           </p>
                           <div class="flex items-center space-x-1">
                             <span>
@@ -86,22 +80,18 @@
                             </span>
                           </div>
                           <span class="text-lg text-bgray-900 font-semibold"
-                            >Total earnings</span
+                            >Loans</span
                           >
                         </div>
                         <div>
-                          <img
-                            src="{% static 'assets/images/avatar/members-2.png' %}"
-                            alt="members"
-                          />
+                          
                         </div>
                       </div>
                       <div class="flex justify-between items-end">
                         <div class="flex-1">
                           <p
-                            class="text-bgray-900 font-bold text-3xl leading-[48px]"
-                          >
-                            $7,245.00
+                            class="text-bgray-900 font-bold text-3xl leading-[48px]">
+                            ₵{{ user.user.loans.outstanding_balance }}
                           </p>
                           <div class="flex items-center space-x-1">
                             <span>
@@ -152,10 +142,7 @@
                           >
                         </div>
                         <div>
-                          <img
-                            src="{% static 'assets/images/avatar/members-2.png' %}"
-                            alt="members"
-                          />
+                          
                         </div>
                       </div>
                       <div class="flex justify-between items-end">
@@ -1543,7 +1530,7 @@
                   </div> {% endcomment %}
                   <div class="w-full">
                     <h3 class="text-lg font-bold text-bgray-900 mb-4">
-                      My Wallet
+                      Account Top Up 
                     </h3>
                     <div class="payment-select relative mb-3">
                       <button
@@ -1567,21 +1554,7 @@
                             1{{user.user.savings_account.balance}}
                           </span>
                           <span class="text-sm font-medium text-bgray-900">
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 16 16"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M4 6L8 10L12 6"
-                                stroke="#A0AEC0"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              />
-                            </svg>
+                            
                           </span>
                         </div>
                       </button>
@@ -1620,22 +1593,20 @@
                       <div
                         class="w-full h-[35px] flex justify-between items-center"
                       >
-                        <span class="text-2xl text-bgray-900 font-bold">$</span>
+                        <span class="text-2xl text-bgray-900 font-bold">₵</span>
                         <label class="w-full">
                           <input
-                            type="text"
-                            class="focus:outline-none w-full p-0 focus:ring-0 border-none text-2xl font-bold text-bgray-900"
+                            type="number"
+                            class="focus:outline-none w-full p-0 focus:ring-0 border-none text-2xl font-bold text-bgray-900"                          
                           />
                         </label>
-                        <div>
-                          <img
-                            src="{% static 'assets/images/avatar/members-3.png' %}"
-                            alt="members"
-                          />
-                        </div>
                       </div>
                     </div>
-                  </div>
+                    <button
+                    class="bg-success-300 hover:bg-success-400 transition-all text-white py-4 w-full font-bold rounded-lg mt-10">
+                    Add Money
+                  </button>
+                  </div>             
                 </div>
                 
               </section>
