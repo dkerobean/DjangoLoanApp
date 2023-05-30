@@ -22,9 +22,6 @@ def indexPage(request, pk):
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
     
-    amount = None 
-    email = None
-    reference = None
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
     
     #Paystack Deposit money
@@ -33,6 +30,7 @@ def indexPage(request, pk):
         email = user.user.email
         transaction_type = 'Deposit'
         reference = generate_reference()
+        user_id = user.id
 
         # create a Transaction
         transaction = Transaction.objects.create(
@@ -42,7 +40,8 @@ def indexPage(request, pk):
             'amount':amount, 
             'email':email, 
             'reference':reference, 
-            'paystack_public_key': paystack_public_key
+            'paystack_public_key': paystack_public_key,
+            'user_id':user_id
         }
         
         messages.warning(request, 'Payment being processed')
@@ -54,11 +53,6 @@ def indexPage(request, pk):
         'user':user, 
         'name':name,
         'username':username, 
-        
-        'amount':amount, 
-        'email':email, 
-        'reference':reference, 
-        'paystack_public_key': paystack_public_key
     }
     
     return render(request, 'user_dashboard/index.html', context)

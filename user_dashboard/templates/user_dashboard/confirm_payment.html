@@ -7,6 +7,281 @@
 <main
             class="w-full xl:px-[48px] px-6 pb-6 xl:pb-[48px] sm:pt-[156px] pt-[100px]">
             <!-- write your code here-->
+
+    <!-- Modal -->
+    <div
+      class="modal hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center"
+      id="multi-step-modal">
+      <div class="modal-overlay absolute inset-0 bg-gray-500 opacity-75"></div>
+      <div
+        class="modal-content flex justify-center w-full px-4 items-center mx-auto">
+        <!-- Step 1 -->
+        <div class="step-content step-1">
+          <div
+            class="max-w-[550px] rounded-lg bg-white p-8 pb-10 transition-all relative"
+          >
+            <button
+              id="step-1-cancel"
+              class="flex justify-center items-center absolute top-6 right-6"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.9492 7.05029L7.04972 16.9498"
+                  stroke="#22C55E"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M7.0498 7.05029L16.9493 16.9498"
+                  stroke="#22C55E"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <header class="py-6 text-center px-8">
+              <h3 class="text-2xl font-bold text-bgray-900 mb-3">Confirm Payment for </h3>              
+            </header>            
+            <div
+              class="flex flex-col md:flex-row justify-between gap-5 md:gap-x-8">
+              
+              <div class="w-full md:w-2/2 text-center">  
+                  <span class="text-2xl text-bgray-900 font-bold text-center">₵ {{amount}}</span> 
+              </div>
+            </div>
+            <button
+              type="submit" id="step-1-next" onclick="payWithPaystack()"
+              class="bg-success-300 hover:bg-success-400 text-white font-semibold text-base py-4 flex justify-center items-center rounded-lg w-full mt-7">
+              Continue
+            </button>
+
+             <!-- Paystack -->
+            <script>
+                var paymentForm = document.getElementById('paymentForm');
+                paymentForm.addEventListener('submit', payWithPaystack, false);
+
+                function payWithPaystack() {
+                    var handler = PaystackPop.setup({
+                        key: '{{paystack_public_key}}',
+                        email: '{{email}}',
+                        amount: '{{amount}}' * 100,
+                        currency: 'GHS',
+                        ref: '{{reference}}',
+                        callback: function(response) {
+                            // Redirect to the user home URL
+                            window.location.href = '{% url "user-home" user_id %}' + response.reference;
+                        },
+                        onClose: function() {
+                            alert('Transaction was not completed, window closed.');
+                        },
+                    });
+
+                    handler.openIframe();
+                }
+            </script>
+
+
+
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step-content step-2 hidden">
+          <div
+            class="max-w-[420px] rounded-lg bg-white p-6 pb-10 transition-all relative"
+          >
+            <button
+              id="step-2-cancel"
+              class="w-6 h-6 bg-bgray-300 rounded-full flex justify-center items-center absolute top-6 right-6"
+            >
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.9498 1.05029L1.05033 10.9498"
+                  stroke="#718096"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1.05029 1.05029L10.9498 10.9498"
+                  stroke="#718096"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <header class="py-6 text-center mt-6">
+              <h3 class="text-2xl font-bold text-bgray-900 mb-3">
+                Add Currency
+              </h3>
+              <p class="text-xs font-medium text-bgray-600">
+                When you add a currency, any payments you receive in that
+                currency will be credited to that balance
+              </p>
+            </header>
+            <form action="my-wallet.html">
+              <div class="relative">
+                <span class="absolute left-4 top-4">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="11.7666"
+                      cy="11.7664"
+                      r="8.98856"
+                      stroke="#1A202C"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M18.0183 18.4849L21.5423 21.9997"
+                      stroke="#1A202C"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  class="p-4 pl-12 w-full rounded-lg border border-bgray-300 placeholder:text-bgray-500 focus:border-success-300 focus:ring-0"
+                  placeholder="Search"
+                />
+              </div>
+            </form>
+            <ul class="pt-6 space-y-1">
+              <li class="flex justify-between items-center py-3">
+                <label for="au" class="flex items-center space-x-4">
+                  <img src="{% static 'assets/images/flag/australia.svg' %}" alt="" />
+                  <span class="text-base font-semibold">Australian Dollar</span>
+                </label>
+                <input
+                  type="checkbox"
+                  id="au"
+                  class="rounded-full w-6 h-6 border-bgray-300 focus:accent-success-300 text-success-300 focus:ring-transparent"
+                />
+              </li>
+              <li class="flex justify-between items-center py-3">
+                <label for="jp" class="flex items-center space-x-4">
+                  <img src="{% static 'assets/images/flag/japan.svg' %}" alt="" />
+                  <span class="text-base font-semibold">Japanese Yen</span>
+                </label>
+                <input
+                  type="checkbox"
+                  id="jp"
+                  class="rounded-full w-6 h-6 border-bgray-300 focus:accent-success-300 text-success-300 focus:ring-transparent"
+                />
+              </li>
+              <li class="flex justify-between items-center py-3">
+                <label for="uk" class="flex items-center space-x-4">
+                  <img src="{% static 'assets/images/flag/uk.svg' %}" alt="" />
+                  <span class="text-base font-semibold">United Kingdom</span>
+                </label>
+                <input
+                  type="checkbox"
+                  id="uk"
+                  class="rounded-full w-6 h-6 border-bgray-300 focus:accent-success-300 text-success-300 focus:ring-transparent"
+                />
+              </li>
+            </ul>
+            <button
+              id="step-2-next"
+              class="bg-success-300 hover:bg-success-400 text-white font-medium text-sm py-4 flex justify-center items-center rounded-lg w-full mt-7"
+            >
+              Add a Currency
+            </button>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step-content step-3 hidden">
+          <div
+            class="max-w-xl w-full rounded-lg bg-white p-5 md:px-14 md:py-8 transition-all"
+          >
+            <header class="flex flex-col items-center">
+              <img src="{% static 'assets/images/icons/invoice.svg' %}" alt="" />
+              <h2 class="text-4xl font-medium text-bgray-900 font-poppins">
+                Payment successful
+              </h2>
+            </header>
+            <ul class="py-6 mt-10 border-t border-b border-gray-200 space-y-4">
+              <li class="flex justify-between">
+                <span class="font-medium text-bgray-900 text-2xl"
+                  >Payment type</span
+                >
+                <span class="text-2xl font-medium text-bgray-500">
+                  Net Banking</span
+                >
+              </li>
+              <li class="flex justify-between">
+                <span class="font-medium text-gray-900 text-2xl">Bank</span>
+                <span class="text-2xl font-medium text-bgray-500"> PayPal</span>
+              </li>
+              <li class="flex justify-between">
+                <span class="font-medium text-gray-900 text-2xl">Mobile</span>
+                <span class="text-2xl font-medium text-bgray-500">
+                  +1 707 797 0462</span
+                >
+              </li>
+              <li class="flex justify-between">
+                <span class="font-medium text-gray-900 text-2xl">Email</span>
+                <span class="text-2xl font-medium text-bgray-500">
+                  markparker@mail.com</span
+                >
+              </li>
+            </ul>
+            <ul class="pt-6 space-y-4">
+              <li class="flex justify-between">
+                <span class="font-bold text-gray-900 text-2xl"
+                  >Amount paid</span
+                >
+                <span class="text-2xl font-bold text-bgray-900"> $500.00</span>
+              </li>
+              <li class="flex justify-between">
+                <span class="font-medium text-gray-900 text-2xl"
+                  >Transaction id</span
+                >
+                <span class="text-2xl font-medium text-bgray-500">
+                  123694559z6465</span
+                >
+              </li>
+            </ul>
+            <div class="flex justify-center gap-8 mt-7">
+              <button
+                class="bg-success-300 hover:bg-success-400 text-white text-xl font-medium py-2 px-5 rounded-md"
+              >
+                Print
+              </button>
+              <button
+                id="step-2-cancel"
+                class="bg-success-300 hover:bg-success-400 text-white text-xl font-medium py-2 px-5 rounded-md"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
             <div class="2xl:flex 2xl:space-x-[48px]">
               <section class="2xl:flex-1 2xl:mb-0 mb-6">
                 <!-- total widget-->
@@ -18,7 +293,7 @@
                           <div class="icon">
                             <span>
                               <img
-                                src="{% static 'assets/images/icons/total-earn.svg' %}"
+                                src="{% static '{% static ' %}'assets/images/icons/total-earn.svg' %}"
                                 alt="icon"
                               />
                             </span>
@@ -74,7 +349,7 @@
                           <div class="icon">
                             <span>
                               <img
-                                src="{% static 'assets/images/icons/total-earn.svg' %}"
+                                src="{% static '{% static ' %}'assets/images/icons/total-earn.svg' %}"
                                 alt="icon"
                               />
                             </span>
@@ -132,7 +407,7 @@
                           <div class="icon">
                             <span>
                               <img
-                                src="{% static 'assets/images/icons/total-earn.svg' %}"
+                                src="{% static '{% static ' %}'assets/images/icons/total-earn.svg' %}"
                                 alt="icon"
                               />
                             </span>
@@ -1088,7 +1363,7 @@
                                 class="w-10 h-10 rounded-full overflow-hidden"
                               >
                                 <img
-                                  src="{% static 'assets/images/avatar/user-40x40.png' %}"
+                                  src="{% static '{% static ' %}'assets/images/avatar/user-40x40.png' %}"
                                   alt="avatar"
                                   class="w-full h-full object-cover"
                                 />
@@ -1164,7 +1439,7 @@
                                 class="w-10 h-10 rounded-full overflow-hidden"
                               >
                                 <img
-                                  src="{% static 'assets/images/avatar/user-40x40-1.png' %}"
+                                  src="{% static '{% static ' %}'assets/images/avatar/user-40x40-1.png' %}"
                                   alt="avatar"
                                   class="w-full h-full object-cover"
                                 />
@@ -1240,7 +1515,7 @@
                                 class="w-10 h-10 rounded-full overflow-hidden"
                               >
                                 <img
-                                  src="{% static 'assets/images/avatar/user-40x40-2.png' %}"
+                                  src="{% static '{% static ' %}'assets/images/avatar/user-40x40-2.png' %}"
                                   alt="avatar"
                                   class="w-full h-full object-cover"
                                 />
@@ -1438,7 +1713,8 @@
               <section class="2xl:w-[400px] w-full flex flex-col lg:flex-row 2xl:space-x-0 2xl:flex-col lg:space-x-6 space-x-0">
                 
               <div class="2xl:w-full lg:w-1/2 w-full rounded-lg bg-white px-[42px] py-5 2xl:mb-6 lg:mb-0 mb-6">
-                
+                <form method="POST" id="paymentForm">
+                    {% csrf_token %}
                       <div class="w-full">
                     <h3 class="text-lg font-bold text-bgray-900 mb-4">
                       Account Top Up 
@@ -1451,14 +1727,14 @@
                         <div class="flex space-x-2 items-center">
                           <span>
                             <img
-                              src="{% static 'assets/images/payments/master-mini.svg' %}"
+                              src="{% static '{% static ' %}'assets/images/payments/master-mini.svg' %}"
                               alt="master"/>
                           </span>
-                          <span class="text-sm font-medium text-bgray-900">Confirm Payment for</span>
+                          <span class="text-sm font-medium text-bgray-900">Account Balance</span>
                         </div>
                         <div class="flex space-x-2 items-center">
                           <span class="text-sm font-bold text-bgray-900">
-                            {{amount}}
+                            {{user.user.savings_account.balance}}
                           </span>
                           <span class="text-sm font-medium text-bgray-900">
                             
@@ -1468,36 +1744,26 @@
                       
                     </div>
                     
-                    
+                    <div class="w-full rounded-lg border border-bgray-200 focus-within:border-success-300 p-4 h-[98px] flex flex-col justify-between">
+                      <p class="text-sm text-bgray-600 font-medium">
+                        Enter amount
+                      </p>
+                      <div class="w-full h-[35px] flex justify-between items-center">
+                        <span class="text-2xl text-bgray-900 font-bold">₵ </span>
+                        <label class="w-full">
+                          <input
+                            type="number" name="amount" id="amount" required
+                            class="focus:outline-none w-full p-0 focus:ring-0 border-none text-2xl font-bold text-bgray-900"                          
+                          />
+                        </label>
+                      </div>
+                    </div>
                     
                     <button type="submit" onclick="payWithPaystack()" class="bg-success-300 hover:bg-success-400 transition-all text-white py-4 w-full font-bold rounded-lg mt-10">
                       Add Money
                   </button>
                   </div>
-                
-                <script>
-                    var paymentForm = document.getElementById('paymentForm');
-                    paymentForm.addEventListener('submit', payWithPaystack, false);
-                    function payWithPaystack() {
-                        var handler = PaystackPop.setup({
-                        key: '{{ paystack_public_key }}', // Replace with your public key
-                        email: '{{email}}',
-                        amount: '{{amount}}' * 100, // the amount value is multiplied by 100 to convert to the lowest currency unit
-                        currency: 'GHS', // Use GHS for Ghana Cedis or USD for US Dollars
-                        ref: '{{reference}}', // Replace with a reference you generated
-                        callback: function(response) {
-                            //this happens after the payment is completed successfully
-                            var reference = response.reference;
-                            alert('Payment complete! Reference: ' + reference);
-                            // Make an AJAX call to your server with the reference to verify the transaction
-                        },
-                        onClose: function() {
-                            alert('Transaction was not completed, window closed.');
-                        },
-                        });
-                        handler.openIframe();
-                    }
-                </script>
+                </form>
                                
               </div>
                 
