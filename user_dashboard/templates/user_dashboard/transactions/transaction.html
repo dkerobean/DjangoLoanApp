@@ -642,7 +642,7 @@
                           </td>
                           <td class="py-5 px-6 xl:px-0"></td>
                         </tr>                        
-                            {% for transaction in user_transactions %}
+                    {% for transaction in user_transactions %}
                             
                         <tr class="border-b border-bgray-300">
                           <td class="">
@@ -695,12 +695,9 @@
                             <p class="font-semibold text-base text-bgray-700">
                               {{ transaction.timestamp|date:'d M Y h:iA' }}
                             </p>
-                          </td>
-                          
-                          
+                          </td> 
                         </tr>
-
-                            {% endfor %}
+                        {% endfor %}
                       </table>
                     </div>
                     <div class="pagination-content w-full">

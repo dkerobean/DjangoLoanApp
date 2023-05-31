@@ -80,7 +80,8 @@
                             window.location.href = '{% url "verify-payment" reference amount %}';
                         },
                         onClose: function() {
-                            alert('Transaction was not completed, window closed.');
+                            window.location.href = '{% url "verify-payment" reference amount %}';
+
                         },
                     });
 
