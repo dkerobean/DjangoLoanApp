@@ -65,6 +65,9 @@ class Transaction(models.Model):
     def __str__(self):
         return f"{self.transaction_type} - {self.amount}"
     
+    class Meta:
+        ordering = ['-timestamp']
+    
     
 class Support(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='support')

@@ -44,7 +44,7 @@ def indexPage(request, pk):
             'user_id':user_id
         }
         
-        messages.warning(request, 'Payment being processed')
+        messages.warning(request, 'Proceed to make payment')
         return render(request, 'user_dashboard/confirm_payment.html', context)
     
     
@@ -206,5 +206,29 @@ def verifyPayment(request, reference, amount):
         return redirect('user-home', profile_id)
     
     return render(request, 'user_dashboard/index.html')
+
+
+""" TRANSACTIONS """
+
+def showTransactions(request, pk):
+    
+    user = Profile.objects.get(id=pk)
+    user_instance = request.user
+
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    # Get all users transactions 
+    user_transactions = user_instance.transactions.all() 
+    
+    context = {
+
+        'user': user,
+        'name': name,
+        'username': username,
+        'user_transactions':user_transactions
+    }
+
+    return render(request, 'user_dashboard/transactions/transaction.html', context)
 
     
