@@ -12,7 +12,9 @@ urlpatterns = [
     
     path('profile/edit/<str:pk>/', views.edit_profile, name="user-edit-profile"), 
     
-    path('support/<str:pk>/', views.support, name="user-support")
+    path('support/<str:pk>/', views.support, name="user-support"),
+    
+    path('verify_payment/<str:reference>/<int:amount>/', views.verifyPayment, name="verify-payment")
     
     
     

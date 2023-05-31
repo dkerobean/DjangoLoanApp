@@ -77,7 +77,7 @@
                         ref: '{{reference}}',
                         callback: function(response) {
                             // Redirect to the user home URL
-                            window.location.href = '{% url "user-home" user_id %}' + response.reference;
+                            window.location.href = '{% url "verify-payment" reference amount %}';
                         },
                         onClose: function() {
                             alert('Transaction was not completed, window closed.');

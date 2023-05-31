@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
-from .models import Profile, Support, Transaction
+from .models import Profile, Support, Transaction, SavingsAccount
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
@@ -177,3 +177,34 @@ def support(request, pk):
 
 
 """ PAYSTACK """
+
+def verifyPayment(request, reference, amount):
+    
+    transaction = Transaction.objects.get(reference=reference)
+    
+    user = request.user
+    profile_id = user.profile.id
+    
+    # Get users account 
+    user_account = SavingsAccount.objects.get(user=user)
+    
+    # Get amount paid 
+    amount_paid = amount
+    
+    if transaction:
+        transaction.verified = True 
+        
+        # add amount paid to users accoubt balance
+        user_account.balance += amount_paid
+        user_account.save()
+        
+        transaction.save()
+        messages.success(request, "Payment verified")
+        return redirect('user-home', profile_id)
+    else:
+        messages.error(request, "Payment not verified")
+        return redirect('user-home', profile_id)
+    
+    return render(request, 'user_dashboard/index.html')
+
+    
