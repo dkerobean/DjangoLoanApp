@@ -660,14 +660,14 @@
                               >
                                 
                               </div>
-                              <p class="font-semibold text-base text-bgray-900">
+                              <p class="font-medium text-base text-bgray-900">
                                 {{transaction.transaction_type}}
                               </p>
                             </div>
                           </td>
                           <td class="py-5 px-6 xl:px-0">
-                            <p class="font-medium text-base text-bgray-900">
-                              {{transaction.amount}}
+                            <p class="font-semibold text-base text-bgray-900">
+                              ₵{{transaction.amount}}
                             </p>
                           </td>
                           <td class="py-5 px-6 xl:px-0">
@@ -692,12 +692,12 @@
                             </p>
                           </td>
                           <td class="py-5 px-6 xl:px-0 w-[165px]">
-                            <p class="font-semibold text-base text-bgray-700">
+                            <p class="font-medium text-base text-bgray-700">
                               {{ transaction.timestamp|date:'d M Y h:iA' }}
                             </p>
                           </td> 
                         </tr>
-                        {% endfor %}
+                    {% endfor %}
                       </table>
                     </div>
                     <div class="pagination-content w-full">

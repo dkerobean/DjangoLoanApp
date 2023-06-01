@@ -44,15 +44,21 @@ def indexPage(request, pk):
             'user_id':user_id
         }
         
+        
         messages.warning(request, 'Proceed to make payment')
         return render(request, 'user_dashboard/confirm_payment.html', context)
+    
+
+    #Get all user transactions 
+    user_transactions = user_instance.transactions.all()[:4]
     
     
     context = {
         
         'user':user, 
         'name':name,
-        'username':username, 
+        'username':username,
+        'user_transactions':user_transactions
     }
     
     return render(request, 'user_dashboard/index.html', context)
@@ -178,6 +184,7 @@ def support(request, pk):
 
 """ PAYSTACK """
 
+@login_required(login_url="user-login")
 def verifyPayment(request, reference, amount):
     
     transaction = Transaction.objects.get(reference=reference)
@@ -210,6 +217,7 @@ def verifyPayment(request, reference, amount):
 
 """ TRANSACTIONS """
 
+@login_required(login_url="user-login")
 def showTransactions(request, pk):
     
     user = Profile.objects.get(id=pk)
@@ -230,5 +238,11 @@ def showTransactions(request, pk):
     }
 
     return render(request, 'user_dashboard/transactions/transaction.html', context)
+
+
+@login_required(login_url="user-login")
+def myWallet(request, pk):
+    
+    return render(request, 'user_dashboard/wallet/wallet.html')
 
     
