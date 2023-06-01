@@ -44,7 +44,6 @@ def indexPage(request, pk):
             'user_id':user_id
         }
         
-        
         messages.warning(request, 'Proceed to make payment')
         return render(request, 'user_dashboard/confirm_payment.html', context)
     
@@ -243,6 +242,52 @@ def showTransactions(request, pk):
 @login_required(login_url="user-login")
 def myWallet(request, pk):
     
-    return render(request, 'user_dashboard/wallet/wallet.html')
+    user = Profile.objects.get(id=pk)
+    user_instance = request.user
+
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    #Get user acount balance 
+    user_account = SavingsAccount.objects.get(user=user_instance)
+    
+    #Get user transactions 
+    user_transactions = Transaction.objects.all()[:4]
+    
+    # Paystack Deposit money
+    
+    paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
+    
+    if request.method == "POST":
+        amount = int(request.POST['amount'])
+        email = user.user.email
+        transaction_type = 'Deposit'
+        reference = generate_reference()
+        user_id = user.id
+
+        # create a Transaction
+        transaction = Transaction.objects.create(
+            user=user_instance, amount=amount, transaction_type=transaction_type, reference=reference)
+
+        context = {
+            'amount': amount,
+            'email': email,
+            'reference': reference,
+            'paystack_public_key': paystack_public_key,
+            'user_id': user_id
+        }
+        
+        messages.warning(request, 'Proceed to make payment')
+        return render(request, 'user_dashboard/confirm_payment.html', context)
+    
+    context = {
+        'user': user,
+        'name': name,
+        'username': username,
+        'user_account':user_account, 
+        'user_transactions':user_transactions
+    }
+
+    return render(request, 'user_dashboard/wallet/wallet.html', context)
 
     
