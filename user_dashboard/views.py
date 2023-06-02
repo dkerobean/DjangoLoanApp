@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
 from django.conf import settings
+from django.db.models import Sum
 
 
 
@@ -42,7 +43,7 @@ def indexPage(request, pk):
             'email':email, 
             'reference':reference, 
             'paystack_public_key': paystack_public_key,
-            'user_id':user_id
+            'user_id':user_id, 
         }
         
         messages.warning(request, 'Proceed to make payment')
@@ -52,13 +53,18 @@ def indexPage(request, pk):
     #Get all user transactions 
     user_transactions = user_instance.transactions.all()[:4]
     
+    # get user loan amount of approved loans
+    user_loan_amount = LoanApplication.objects.filter(
+        user=user_instance, status='approved').aggregate(Sum('amount'))['amount__sum']
+    
     
     context = {
         
         'user':user, 
         'name':name,
         'username':username,
-        'user_transactions':user_transactions
+        'user_transactions':user_transactions, 
+        'user_loan_amount': user_loan_amount
     }
     
     return render(request, 'user_dashboard/index.html', context)
