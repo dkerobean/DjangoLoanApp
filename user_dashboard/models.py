@@ -2,6 +2,7 @@ from django.db import models
 import uuid 
 from django.contrib.auth.models import User
 from .utils import generate_account_number
+from frontend.models import LoanApplication
 
 
 class Profile(models.Model):
@@ -31,19 +32,6 @@ class SavingsAccount(models.Model):
     def __str__(self):
         return f"{self.user} - {self.account_number}"
     
-class Loan(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='loans')
-    loan_amount = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0)
-    repayment_period = models.IntegerField(blank=True, null=True)
-    interest_rate = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    outstanding_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,
-                          primary_key=True, editable=False)
-    
-    def __str__(self):
-        return f"Loan #{self.user}"
 
 
 class Transaction(models.Model):
@@ -52,7 +40,7 @@ class Transaction(models.Model):
     # account = models.ForeignKey(
     #     SavingsAccount, on_delete=models.CASCADE, 
     #                         blank=True, null=True, related_name='transactions')
-    loan = models.ForeignKey(Loan, on_delete=models.CASCADE,
+    loan = models.ForeignKey(LoanApplication, on_delete=models.CASCADE,
                              blank=True, null=True, related_name='transactions')
     transaction_type = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=10, decimal_places=2)

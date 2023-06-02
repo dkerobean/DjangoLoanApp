@@ -18,10 +18,10 @@ urlpatterns = [
     
     path('transactions/<str:pk>/', views.showTransactions, name="user-transactions"), 
     
-    path('wallet/<str:pk>/', views.myWallet, name="user-wallet")
+    path('wallet/<str:pk>/', views.myWallet, name="user-wallet"), 
     
-    
-    
+    path('loan/<str:pk>/', views.userLoans, name="user-loans")
+      
     
 ]
 

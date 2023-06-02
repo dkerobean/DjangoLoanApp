@@ -5,6 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
 from .models import Profile, Support, Transaction, SavingsAccount
+from frontend.models import LoanApplication
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
@@ -229,7 +230,6 @@ def showTransactions(request, pk):
     user_transactions = user_instance.transactions.all() 
     
     context = {
-
         'user': user,
         'name': name,
         'username': username,
@@ -238,6 +238,8 @@ def showTransactions(request, pk):
 
     return render(request, 'user_dashboard/transactions/transaction.html', context)
 
+
+""" WALLET """
 
 @login_required(login_url="user-login")
 def myWallet(request, pk):
@@ -252,7 +254,7 @@ def myWallet(request, pk):
     user_account = SavingsAccount.objects.get(user=user_instance)
     
     #Get user transactions 
-    user_transactions = Transaction.objects.all()[:4]
+    user_transactions = user_instance.transactions.all()[:5]
     
     # Paystack Deposit money
     
@@ -290,4 +292,30 @@ def myWallet(request, pk):
 
     return render(request, 'user_dashboard/wallet/wallet.html', context)
 
+
+""" LOANS """
+
+@login_required(login_url="user-login")
+def userLoans(request, pk):
+    
+    user = Profile.objects.get(id=pk)
+    user_instance = request.user
+
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    #Get user's loan
+    user_loan = user_instance.loans.all()
+    
+    #get oustanding balance
+    
+    
+    context = {
+        'user': user,
+        'name': name,
+        'username': username,
+        'user_loan':user_loan
+    }
+
+    return render(request, 'user_dashboard/loans/loan.html', context)
     

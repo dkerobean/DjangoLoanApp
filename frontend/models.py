@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import uuid
 
 
+
 class Contact(models.Model):
     
     name = models.CharField(max_length=150)
@@ -29,13 +30,17 @@ class LoanApplication(models.Model):
         ('debt', 'Debt'),
     )
     
-    
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='loans')
     loan_type = models.CharField(max_length=50)
     amount = models.DecimalField(max_digits=15, decimal_places=2)
+    outstanding_balance = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
     duration = models.IntegerField()
     finance_type = models.CharField(
         max_length=20, choices=LOAN_FINANCE_TYPE, default='credit')
+    interest_rate = models.DecimalField(
+        max_digits=5, decimal_places=2, blank=True, null=True)
     date_of_birth = models.DateField()
     marital_status = models.CharField(max_length=50)
     mobile_number = models.IntegerField()
