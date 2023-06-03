@@ -61,9 +61,15 @@ class Support(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='support')
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=250)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True,
+                          primary_key=True, editable=False)
     
     def __str__(self):
         return self.title
+    
+
+
     
     
     

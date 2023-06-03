@@ -57,6 +57,9 @@ def indexPage(request, pk):
     user_loan_amount = LoanApplication.objects.filter(
         user=user_instance, status='approved').aggregate(Sum('amount'))['amount__sum']
     
+    #Get user available balance 
+    current_balance = user_instance.savings_account.balance - user_loan_amount
+    
     
     context = {
         
@@ -64,7 +67,8 @@ def indexPage(request, pk):
         'name':name,
         'username':username,
         'user_transactions':user_transactions, 
-        'user_loan_amount': user_loan_amount
+        'user_loan_amount': user_loan_amount, 
+        'current_balance':current_balance
     }
     
     return render(request, 'user_dashboard/index.html', context)
@@ -313,8 +317,6 @@ def userLoans(request, pk):
     #Get user's loan
     user_loan = user_instance.loans.all()
     
-    #get oustanding balance
-    
     
     context = {
         'user': user,
@@ -324,4 +326,26 @@ def userLoans(request, pk):
     }
 
     return render(request, 'user_dashboard/loans/loan.html', context)
+
+""" INBOX """
+
+def userInbox(request, pk):
+    
+    user = Profile.objects.get(id=pk)
+    user_instance = request.user
+
+    name = f"{user.user.first_name} {user.user.last_name}"
+    username = user.user.username
+    
+    #get user messages 
+    user_messages = user_instance.support.all()
+    
+    context = {
+        'user': user,
+        'name': name,
+        'username': username,
+        'user_messages':user_messages
+    }
+
+    return render(request, 'user_dashboard/inbox/inbox.html', context)
     

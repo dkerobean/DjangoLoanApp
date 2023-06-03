@@ -190,39 +190,7 @@
                     </a>
                   </li>
                   <li class="item py-[11px] text-bgray-900">
-                    <a href="https://spaceraceit.com/html/bankco/statistics.html">
-                      <div class="flex items-center justify-between">
-                        <div class="flex space-x-2.5 items-center">
-                          <span class="item-ico">
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 20 20"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M18 11C18 15.9706 13.9706 20 9 20C4.02944 20 0 15.9706 0 11C0 6.02944 4.02944 2 9 2C13.9706 2 18 6.02944 18 11Z"
-                                fill="#1A202C"
-                                class="path-1"
-                              />
-                              <path
-                                d="M19.8025 8.01277C19.0104 4.08419 15.9158 0.989557 11.9872 0.197453C10.9045 -0.0208635 10 0.89543 10 2V8C10 9.10457 10.8954 10 12 10H18C19.1046 10 20.0209 9.09555 19.8025 8.01277Z"
-                                fill="#22C55E"
-                                class="path-2"
-                              />
-                            </svg>
-                          </span>
-                          <span
-                            class="item-text text-lg font-medium leading-none"
-                            >Statistics</span
-                          >
-                        </div>
-                      </div>
-                    </a>
-                  </li>                 
-                  <li class="item py-[11px] text-bgray-900">
-                    <a href="https://spaceraceit.com/html/bankco/messages.html">
+                    <a href="{% url 'user-inbox' request.user.profile.id %}">
                       <div class="flex items-center justify-between">
                         <div class="flex space-x-2.5 items-center">
                           <span class="item-ico">
@@ -254,84 +222,37 @@
                               />
                             </svg>
                           </span>
-                          <span
-                            class="item-text text-lg font-medium leading-none"
-                            >Inbox</span
-                          >
+                          <span class="item-text text-lg font-medium leading-none">Inbox</span>
                         </div>
                         <div class="flex space-x-2.5 items-center">
-                          <!--edit-->
-                          <span>
-                            <svg
-                              width="10"
-                              height="11"
-                              viewBox="0 0 10 11"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M0.879751 10.0038L3.16823 9.67657C3.49833 9.62937 3.80424 9.47626 4.04003 9.24024L8.45886 4.81709C8.45886 4.81709 7.36911 4.81709 6.27936 3.72628C5.18961 2.63546 5.18961 1.54465 5.18961 1.54465L0.770776 5.9678C0.534986 6.20382 0.382033 6.51002 0.334876 6.84045L0.00795056 9.13116C-0.0646994 9.64021 0.371201 10.0765 0.879751 10.0038Z"
-                                fill="#1A202C"
-                              />
-                              <path
-                                opacity="0.4"
-                                d="M9.5487 1.5446L8.45895 0.453784C7.8571 -0.148657 6.8813 -0.148657 6.27945 0.453784L5.1897 1.5446C5.1897 1.5446 5.1897 2.63542 6.27945 3.72623C7.3692 4.81705 8.45895 4.81705 8.45895 4.81705L9.5487 3.72623C10.1506 3.12379 10.1506 2.14704 9.5487 1.5446Z"
-                                fill="#1A202C"
-                              />
-                            </svg>
-                          </span>
-                          <!--edit-->
-                          <div>
-                            <img
-                              src="{% static 'assets/images/avatar/profile-xs.png' %}"
-                              alt="profile"
-                            />
-                          </div>
+                          
                           <!--counter-->
-                          <div
-                            class="w-5 h-5 rounded-full bg-success-300 flex justify-center items-center"
-                          >
-                            <span class="text-[10px] font-semibold text-white"
-                              >5</span
-                            >
+                          <div class="w-5 h-5 rounded-full bg-success-300 flex justify-center items-center">
+                            <span class="text-[10px] font-semibold text-white">5</span>
                           </div>
                         </div>
                       </div>
                     </a>
                   </li>
                   <li class="item py-[11px] text-bgray-900">
-                    <a href="https://spaceraceit.com/html/bankco/integrations.html">
+                    <a href="https://spaceraceit.com/html/bankco/statistics.html">
                       <div class="flex items-center justify-between">
                         <div class="flex space-x-2.5 items-center">
                           <span class="item-ico">
                             <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M1.57666 3.61499C1.57666 2.51042 2.47209 1.61499 3.57666 1.61499H8.5C9.60456 1.61499 10.5 2.51042 10.5 3.61499V8.53833C10.5 9.64289 9.60456 10.5383 8.49999 10.5383H3.57666C2.47209 10.5383 1.57666 9.64289 1.57666 8.53832V3.61499Z"
+                                d="M18 11C18 15.9706 13.9706 20 9 20C4.02944 20 0 15.9706 0 11C0 6.02944 4.02944 2 9 2C13.9706 2 18 6.02944 18 11Z"
                                 fill="#1A202C"
                                 class="path-1"
                               />
                               <path
-                                d="M13.5 15.5383C13.5 14.4338 14.3954 13.5383 15.5 13.5383H20.4233C21.5279 13.5383 22.4233 14.4338 22.4233 15.5383V20.4617C22.4233 21.5662 21.5279 22.4617 20.4233 22.4617H15.5C14.3954 22.4617 13.5 21.5662 13.5 20.4617V15.5383Z"
-                                fill="#1A202C"
-                                class="path-1"
-                              />
-                              <circle
-                                cx="6.03832"
-                                cy="18"
-                                r="4.46166"
-                                fill="#1A202C"
-                                class="path-1"
-                              />
-                              <path
-                                fill-rule="evenodd"
-                                clip-rule="evenodd"
-                                d="M18 2C18.4142 2 18.75 2.33579 18.75 2.75V5.25H21.25C21.6642 5.25 22 5.58579 22 6C22 6.41421 21.6642 6.75 21.25 6.75H18.75V9.25C18.75 9.66421 18.4142 10 18 10C17.5858 10 17.25 9.66421 17.25 9.25V6.75H14.75C14.3358 6.75 14 6.41421 14 6C14 5.58579 14.3358 5.25 14.75 5.25H17.25V2.75C17.25 2.33579 17.5858 2 18 2Z"
+                                d="M19.8025 8.01277C19.0104 4.08419 15.9158 0.989557 11.9872 0.197453C10.9045 -0.0208635 10 0.89543 10 2V8C10 9.10457 10.8954 10 12 10H18C19.1046 10 20.0209 9.09555 19.8025 8.01277Z"
                                 fill="#22C55E"
                                 class="path-2"
                               />
@@ -339,49 +260,12 @@
                           </span>
                           <span
                             class="item-text text-lg font-medium leading-none"
-                            >Integrations</span
+                            >Statistics</span
                           >
                         </div>
                       </div>
                     </a>
-                  </li>
-                  <li class="item py-[11px] text-bgray-900">
-                    <a href="https://spaceraceit.com/html/bankco/users.html">
-                      <div class="flex items-center justify-between">
-                        <div class="flex space-x-2.5 items-center">
-                          <span class="item-ico">
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <ellipse
-                                cx="11.7778"
-                                cy="17.5555"
-                                rx="7.77778"
-                                ry="4.44444"
-                                class="path-1"
-                                fill="#1A202C"
-                              />
-                              <circle
-                                class="path-2"
-                                cx="11.7778"
-                                cy="6.44444"
-                                r="4.44444"
-                                fill="#22C55E"
-                              />
-                            </svg>
-                          </span>
-                          <span
-                            class="item-text text-lg font-medium leading-none"
-                            >User</span
-                          >
-                        </div>
-                      </div>
-                    </a>
-                  </li>
+                  </li>                                                     
                   <li class="item py-[11px] text-bgray-900">
                     <a href="https://spaceraceit.com/html/bankco/calender.html">
                       <div class="flex items-center justify-between">
@@ -583,10 +467,10 @@
               <p class="text-sm text-bgray-700 font-medium">
                 Made with ❤️ by
                 <a
-                  href="index.html#"
+                  href="#"
                   target="_blank"
                   class="font-semibold border-b hover:text-blue-600"
-                  >QuomodoTheme</a
+                  >DeekieTech</a
                 >
               </p>
             </div>
