@@ -41,7 +41,8 @@
                         {% for message in user_messages %}
                             <div class="flex space-x-6 px-4 py-8 bg-white rounded-xl">
                           <div>
-                            <img src="{% static 'assets/images/avatar/sa-1.png' %}" alt="" />
+                            <img class="object-cover w-10 h-10 rounded-full" src="{{ message.user.profile.profile_picture.url }}" alt="Avatar">
+
                           </div>
                           <div>
                             <h4 class="font-semibold text-sm text-bgray-600 mb-2">

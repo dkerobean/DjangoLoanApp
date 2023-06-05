@@ -188,20 +188,12 @@
                     onclick="profileAction()"
                     class="flex lg:space-x-3 space-x-0 cursor-pointer"
                   >
-                    <div
-                      class="w-[52px] h-[52px] rounded-xl border border-bgray-300 overflow-hidden"
-                    >
-                      <img
-                        class="object-cover"
-                        src="{% static 'assets/images/avatar/profile-52x52.png' %}"
-                        alt="avater"
-                      />
+                    <div class="w-[52px] h-[52px] rounded-xl  border-bgray-300 overflow-hidden">
+                      <img class="object-cover w-10 h-10 rounded-full" src="{{ user.profile_picture.url }}" alt="Avatar">
                     </div>
                     <div class="2xl:block hidden">
                       <div class="flex space-x-2.5 items-center">
-                        <h3
-                          class="text-base text-bgray-900 font-bold leading-[28px]"
-                        >
+                        <h3 class="text-base text-bgray-900 font-bold leading-[28px]">
                            {{name}}
                         </h3>
                         <span>
@@ -210,8 +202,7 @@
                             height="24"
                             viewBox="0 0 24 24"
                             fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                            xmlns="http://www.w3.org/2000/svg">
                             <path
                               d="M7 10L12 14L17 10"
                               stroke="#28303F"

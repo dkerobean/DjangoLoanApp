@@ -43,7 +43,8 @@ def indexPage(request, pk):
             'email':email, 
             'reference':reference, 
             'paystack_public_key': paystack_public_key,
-            'user_id':user_id, 
+            'user_id':user_id
+            
         }
         
         messages.warning(request, 'Proceed to make payment')

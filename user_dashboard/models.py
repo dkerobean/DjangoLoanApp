@@ -69,6 +69,17 @@ class Support(models.Model):
         return self.title
     
 
+class MessageReply(models.Model):
+    support = models.ForeignKey(
+        Support, on_delete=models.CASCADE, related_name='replies')
+    reply_content = models.CharField(max_length=250)
+    timestamp = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def __str__(self):
+        return f"Reply to: {self.support.title}"
+
+    
+
 
     
     
