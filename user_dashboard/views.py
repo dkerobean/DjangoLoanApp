@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
 from django.conf import settings
 from django.db.models import Sum
+from decimal import Decimal
 
 
 
@@ -44,7 +45,6 @@ def indexPage(request, pk):
             'reference':reference, 
             'paystack_public_key': paystack_public_key,
             'user_id':user_id
-            
         }
         
         messages.warning(request, 'Proceed to make payment')
@@ -58,8 +58,14 @@ def indexPage(request, pk):
     user_loan_amount = LoanApplication.objects.filter(
         user=user_instance, status='approved').aggregate(Sum('amount'))['amount__sum']
     
+    if user_loan_amount is None:
+        user_loan_amount = 0.00
+    
     #Get user available balance 
-    current_balance = user_instance.savings_account.balance - user_loan_amount
+    if user_loan_amount is not None:
+        current_balance = user_instance.savings_account.balance - Decimal(user_loan_amount)
+    else:
+        current_balance = user_instance.savings_account.balance
     
     
     context = {
@@ -129,7 +135,8 @@ def registerPage(request):
             user.save()
             messages.success(request, 'Account created successfuly')
             login(request, user)
-            return redirect('user-home')
+            user_id = request.user.profile.id
+            return redirect('user-home', user_id)
         
     context = {
         'form':form

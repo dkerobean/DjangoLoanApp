@@ -1,18 +1,7 @@
  {% load static %}
 
-<script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'assets/js/flatpickr.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<!-- toastr message -->
-    {% if messages %}
-      {% for message in messages %}
-        <script>
-          toastr.{{message.tags}}("{{message}}");
-        </script>
-      {% endfor %}
-    {% endif %}
-    
+ <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+  <script src="{% static 'assets/js/flatpickr.js' %}"></script>
 <script>
     // min-calender
     $("#min-calender").flatpickr({
@@ -527,4 +516,4 @@
     pieChart();
 </script>
 
-<script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>

@@ -25,7 +25,7 @@ urlpatterns = [
     
     path('', include('frontend.urls')), 
     path('dashboard/', include('user_dashboard.urls')),
-    path('admin-dasboard', include('admin_dashboard.urls')),
+    path('admin-dasboard/', include('admin_dashboard.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
     
 ]
