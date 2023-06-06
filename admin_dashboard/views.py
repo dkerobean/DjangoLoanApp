@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
-def admin_login(request):
+def indexPage(request):
     
-    return render(request, 'admin_dashboard/auth/login.html')
+    return render(request, 'admin_dashboard/index.html')

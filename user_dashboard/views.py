@@ -79,8 +79,11 @@ def indexPage(request, pk):
 
 def loginPage(request):
     
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('admin-dashboard')
+    elif request.user.is_authenticated:
         return redirect('user-home')
+    
     
     if request.method == "POST":
         username = request.POST['username']
@@ -94,10 +97,20 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
+            
+            #user has staff status
+            if user.is_staff:
+                login(request, user)
+                messages.success(request, 'Logged in succesfully')
+                user_id = request.user.profile.id
+                return redirect('admin-dashboard')
+            
+            #normal user without staff status
             login(request, user)
             messages.success(request, 'Logged in succesfully')
             user_id = request.user.profile.id
             return redirect('user-home', user_id)
+        
         else:
             messages.error(request, 'Username or Password incorrect')
             
