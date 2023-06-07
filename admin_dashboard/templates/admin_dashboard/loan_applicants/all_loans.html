@@ -1,0 +1,173 @@
+{% extends 'layouts/admin_dashboard.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<main class="w-full xl:px-[48px] px-6 pb-6 xl:pb-[48px] sm:pt-[156px] pt-[100px]">
+          <!-- write your code here-->
+          <div class="flex 2xl:flex-row 2xl:space-x-11 flex-col space-y-20">
+            <div class="2xl:flex-1 w-full">
+              <div class="bg-white dark:bg-darkblack-600 rounded-lg p-4 mb-8 items-center flex">
+                <div class="flex items-center flex-1 pl-4 xl:border-r border-bgray-400 dark:border-darkblack-400">
+                  <span class="">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M21 21L17 17" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <input type="text"
+                    class="border-0 w-full dark:bg-darkblack-600 dark:text-white focus:outline-none focus:ring-0 focus:border-none"
+                    placeholder="Job Title, Company, or Keywords " />
+                </div>
+                <div class="relative">
+                  <div onclick="dateFilterAction('#locationSelect')"
+                    class="items-center pl-9 border-r border-bgray-400 dark:border-darkblack-400 xl:flex hidden">
+                    <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M19.9092 10.448C19.9092 16.4935 11.9092 21.6753 11.9092 21.6753C11.9092 21.6753 3.90918 16.4935 3.90918 10.448C3.90918 8.38656 4.75203 6.40954 6.25233 4.95187C7.75262 3.4942 9.78745 2.67529 11.9092 2.67529C14.0309 2.67529 16.0657 3.4942 17.566 4.95187C19.0663 6.40954 19.9092 8.38656 19.9092 10.448Z"
+                          stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M12 12.6753C13.3807 12.6753 14.5 11.556 14.5 10.1753C14.5 8.79458 13.3807 7.67529 12 7.67529C10.6193 7.67529 9.5 8.79458 9.5 10.1753C9.5 11.556 10.6193 12.6753 12 12.6753Z"
+                          stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <input type="text"
+                      class="border-0 dark:bg-darkblack-600 focus:outline-none focus:ring-0 focus:border-none"
+                      placeholder="Select Location " />
+                    <span class="pr-10"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 9L12 15L18 9" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"
+                          stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div id="locationSelect"
+                    class="rounded-lg shadow-lg w-full bg-white dark:bg-darkblack-500 absolute right-0 z-10 top-full hidden overflow-hidden">
+                    <ul>
+                      <li onclick="dateFilterAction('#locationSelect')"
+                        class="text-sm  text-bgray-900 dark:text-bgray-50 hover:dark:bg-darkblack-600  cursor-pointer px-5 py-2 hover:bg-bgray-100 font-semibold">
+                        Bangladesh
+                      </li>
+                      <li onclick="dateFilterAction('#locationSelect')"
+                        class="text-sm  text-bgray-900 dark:text-bgray-50 hover:dark:bg-darkblack-600   cursor-pointer px-5 py-2 hover:bg-bgray-100 font-semibold">
+                        America
+                      </li>
+                      <li onclick="dateFilterAction('#locationSelect')"
+                        class="text-sm  text-bgray-900 dark:text-bgray-50 hover:dark:bg-darkblack-600  cursor-pointer px-5 py-2 hover:bg-bgray-100 font-semibold">
+                        Thailand
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="pl-8 md:block hidden">
+                  <button>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1.49999 1H14.5C14.644 1.05051 14.7745 1.13331 14.8816 1.24206C14.9887 1.35082 15.0695 1.48264 15.1177 1.62742C15.166 1.77221 15.1805 1.92612 15.1601 2.07737C15.1396 2.22861 15.0849 2.37318 15 2.5L9.99998 8V15L5.99999 12V8L0.999985 2.5C0.915076 2.37318 0.860321 2.22861 0.839913 2.07737C0.819506 1.92612 0.833987 1.77221 0.882249 1.62742C0.930511 1.48264 1.01127 1.35082 1.11835 1.24206C1.22542 1.13331 1.35597 1.05051 1.49999 1Z"
+                        stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="pl-10 md:block hidden">
+                  <button
+                    class="py-3 px-10 bg-bgray-600 dark:bg-darkblack-500 rounded-lg text-white font-medium text-sm">
+                    Search
+                  </button>
+                </div>
+              </div>
+              <div class="w-full overflow-x-scroll">
+                <table class="w-full">
+                  <tbody>
+
+                    {% for loan in all_loans %}
+                        <tr class="bg-white dark:bg-darkblack-600">
+                      <td class="whitespace-nowrap p-4 text-sm font-medium rounded-l-lg">                        
+                        </span>
+                      </td>
+                      <td class="whitespace-nowrap py-4 text-sm text-gray-500 w-[400px] lg:w-auto">
+                        <div class="flex items-center gap-5">
+                          <div class="w-[64px] h-[64px]">
+                            <img class="w-full h-full object-cover rounded-lg" src="{{ loan.user.profile.profile_picture.url }}"
+                              alt="" />
+                          </div>
+                          <div class="flex-1">
+                            <h4 class="font-bold text-lg text-bgray-900 dark:text-white">
+                              {{ loan.user.first_name }} {{ loan.user.last_name }}
+                            </h4>
+                            <div>
+                              <span class="font-medium text-base text-bgray-700 dark:text-bgray-50">Applied •
+                              </span><span class="text-gray-500">{{ loan.created_at|timesince}} ago</span>                             
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <h5 class="font-medium text-lg text-bgray-900 dark:text-white">
+                              {{ loan.finance_type|capfirst}} Loan
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <h5 class="font-bold text-lg text-bgray-900 dark:text-white">
+                              ₵{{ loan.amount }}
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <h5 class="font-medium text-lg text-bgray-900 dark:text-white">
+                              {{ loan.loan_type|capfirst}} Loan
+                      </td>
+                      <td class="whitespace-nowrap px-2 py-4 text-sm text-gray-500">
+                        
+                        {% if loan.status == 'pending' %}
+                            <span class="bg-bamber-50 dark:bg-darkblack-500 rounded-lg text-sm text-bamber-500 font-medium text-am px-3 py-1">
+                                Pending
+                            </span>
+                        {% elif loan.status == 'approved' %}
+                            <span class="bg-success-50 dark:bg-darkblack-500 text-sm text-success-300 font-medium rounded-lg py-1 px-3">
+                                Approved
+                            </span>
+                        {% else %}
+                            <span class="bg-error-50 dark:bg-darkblack-500 rounded-lg text-sm text-error-300 font-medium text-am px-3 py-1">
+                                Declined
+                            </span>
+                        {% endif %}
+                            
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <a href="{% url 'view-loan' loan.id %}"
+                          class="bg-success-300 hover:bg-success-400 transition duration-300 ease-in-out ml-6 font-semibold text-white py-3 flex items-center justify-center rounded-xl">
+                          View Application
+                        </a>
+                      </td>
+                      <td class="whitespace-nowrap pr-3 py-4 text-sm text-gray-500 rounded-r-lg">
+                        <button class="">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z"
+                              stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                              d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+                              stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                              d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z"
+                              stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+          <!-- write your code here-->
+        </main>
+
+{% endblock content %}
