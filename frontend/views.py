@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import ContactForm 
 from django.contrib import messages
 from .models import LoanApplication
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -20,7 +21,7 @@ def loanApplication(request):
     
     return render(request, 'frontend/loan/loan_application')
 
-
+@login_required(login_url="user-login")
 def loanDetails(request):
     if request.method == "POST":
         loan_type = request.POST.get("select-loan-type")
@@ -42,6 +43,7 @@ def loanDetails(request):
     return render(request, 'frontend/loan/loan_details.html')
 
 
+@login_required(login_url="user-login")
 def personalDetails(request):
     
     if request.method == "POST":
@@ -68,6 +70,7 @@ def personalDetails(request):
     return render(request, 'frontend/loan/personal_details.html')
 
 
+@login_required(login_url="user-login")
 def documentUpload(request):
     
     if request.method == "POST":
