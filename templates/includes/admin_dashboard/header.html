@@ -74,27 +74,18 @@
                         stroke="#2A313C" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
                   </button>
-                  <button onclick="storeAction()" type="button" id="store-btn"
-                    class="w-[52px] h-[52px] rounded-[12px] border border-success-300 flex justify-center items-center relative">
-                    <span
-                      class="w-3.5 h-3.5 rounded-full bg-bgray-300 border-2 border-white absolute -right-[5px] -top-[2px]"></span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M4 11H20M4 11C2.89543 11 2 10.1046 2 9V8C2 6.89543 2.89543 6 4 6H20C21.1046 6 22 6.89543 22 8V9C22 10.1046 21.1046 11 20 11M4 11L4 20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V11M12 6H16C17.1046 6 18 5.10457 18 4C18 2.89543 17.1046 2 16 2C13.7909 2 12 3.79086 12 6ZM12 6H8C6.89543 6 6 5.10457 6 4C6 2.89543 6.89543 2 8 2C10.2091 2 12 3.79086 12 6ZM12 6V22"
-                        stroke="#1A202C" stroke-width="1.5" stroke-linecap="round" />
-                    </svg>
-                  </button>
+                  
                 </div>
                 <div class="xl:block hidden h-[48px] w-[1px] bg-bgray-300"></div>
                 <!--                author-->
                 <div onclick="profileAction()" class="flex lg:space-x-3 space-x-0 cursor-pointer">
-                  <div class="w-[52px] h-[52px] rounded-xl border border-bgray-300 overflow-hidden">
-                    <img class="object-cover" src="{% static 'assets/images/avatar/profile-52x52.png' %}" alt="avater" />
+                  <div class="w-[52px] h-[52px] rounded-xl overflow-hidden">
+                    <img class="object-cover rounded-full" src="{{ request.user.profile.profile_picture.url }}" alt="avatar" />
                   </div>
                   <div class="2xl:block hidden">
                     <div class="flex space-x-2.5 items-center">
                       <h3 class="text-base text-bgray-900 font-bold leading-[28px]">
-                        John Doe
+                        {{ request.user.first_name }} {{ request.user.last_name }}
                       </h3>
                       <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,9 +94,16 @@
                         </svg>
                       </span>
                     </div>
-                    <p class="text-sm font-medium leading-[20px] text-bgray-600">
-                      Super Admin
-                    </p>
+                    {% if request.user.is_admin %}
+                      <p class="text-sm font-medium leading-[20px] text-bgray-600">
+                        Super Admin
+                      </p>
+                    {% else %}
+                      <p class="text-sm font-medium leading-[20px] text-bgray-600">
+                        Admin
+                      </p>
+                    {% endif %}
+                    
                   </div>
                 </div>
               </div>

@@ -1,10 +1,43 @@
 from django.shortcuts import render
 from frontend.models import LoanApplication
+from user_dashboard.models import SavingsAccount, Transaction
 from .forms import LoanForm
+from django.db.models import Sum, Count
+from django.contrib.auth.models import User
+
+
 
 def indexPage(request):
     
-    return render(request, 'admin_dashboard/index.html')
+    #total deposits for user
+    total_deposit = SavingsAccount.objects.aggregate(Sum('balance'))[
+        'balance__sum']
+    formatted_deposit = "{:,.2f}".format(total_deposit)  # Format balance with commas
+    
+    #get sum of loans of users
+    total_loans = LoanApplication.objects.filter(
+        status='approved').aggregate(Sum('amount'))['amount__sum']
+    formatted_loans = "{:,.2f}".format(total_loans)
+    
+    #get total users
+    total_users = User.objects.count()
+    
+    #total loan application 
+    number_of_loans = LoanApplication.objects.aggregate(total=Count('id'))['total']
+    
+    #all users transactions
+    user_transactions = Transaction.objects.all()[:6]
+    
+    
+    context = {
+        'formatted_deposit':formatted_deposit,
+        'formatted_loans':formatted_loans, 
+        'total_users':total_users, 
+        'number_of_loans': number_of_loans, 
+        'user_transactions':user_transactions
+    }
+    
+    return render(request, 'admin_dashboard/index.html', context)
 
 
 def loanApplicants(request):
