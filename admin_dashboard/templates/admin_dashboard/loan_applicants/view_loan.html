@@ -172,12 +172,17 @@
               <div class="flex justify-center mt-8 m-5">
                 <form action="" method="POST">
                   {% csrf_token %}
-                  {% for field in form %}
-                    {{ field }}
-                  {% endfor %} 
+                  
+                    <label for="status">Change Status:</label>
+                      <select name="status" class="text-bgray-800 text-base border border-bgray-300 h-14 focus:border-success-300 focus:ring-0 rounded-lg placeholder:text-bgray-500 placeholder:text-base">
+                        <option value="pending">Hold</option>
+                        <option value="approved">Approve</option>
+                        <option value="rejected">Reject</option>
+                      </select>
+
                   <br>                                   
                   <button type="submit" data-target="#multi-step-modal"
-                    class="bg-success-300 hover:bg-success-400 transition duration-300 ease-in-out modal-open py-3 px-7 text-white rounded-lg font-medium">
+                    class="bg-success-300 hover:bg-success-400 transition duration-300 ease-in-out modal-open py-3 px-7 text-white rounded-lg font-medium mt-5">
                     Save
                   </button>
                 </form>

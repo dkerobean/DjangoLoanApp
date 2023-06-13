@@ -88,7 +88,8 @@ def loginPage(request):
     if request.user.is_authenticated and request.user.is_staff:
         return redirect('admin-dashboard')
     elif request.user.is_authenticated:
-        return redirect('user-home')
+        user_id = request.user.profile.id
+        return redirect('user-home', user_id)
     
     
     if request.method == "POST":

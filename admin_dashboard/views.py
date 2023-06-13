@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from frontend.models import LoanApplication
 from user_dashboard.models import SavingsAccount, Transaction
-from .forms import LoanForm
 from django.db.models import Sum, Count
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 
@@ -55,19 +55,16 @@ def viewApplication(request, pk):
     
     user_loan = LoanApplication.objects.get(id=pk)
     
-    form = LoanForm()
-    
-    if request.method == "POST":
-        form = LoanForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Status changed successfully')
-            return redirect('all-loans')
-            
-    
+    if request.method == 'POST':
+        loan_status = request.POST.get('status')
+        user_loan.status = loan_status
+        user_loan.save()
+        messages.success(request, 'Status Changed successfully')
+        return redirect('all-loans')
+        
+        
     context = {
-        'user_loan':user_loan, 
-        'form':form
+        'user_loan':user_loan
     }
     
     return render(request, 'admin_dashboard/loan_applicants/view_loan.html', context)
