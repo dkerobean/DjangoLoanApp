@@ -7,4 +7,6 @@ urlpatterns = [
     
     path('all_loans/', views.loanApplicants, name="all-loans"),
     path('loan_application/<str:pk>/', views.viewApplication, name="view-loan"),
+    
+    path('transaction/', views.viewTransactions, name="transactions")
 ]

@@ -4,9 +4,17 @@ from user_dashboard.models import SavingsAccount, Transaction
 from django.db.models import Sum, Count
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 
+#check if user is staff
+def is_admin(user):
+    return user.is_authenticated and user.is_staff
 
+
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
 def indexPage(request):
     
     #total deposits for user
@@ -40,6 +48,8 @@ def indexPage(request):
     return render(request, 'admin_dashboard/index.html', context)
 
 
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
 def loanApplicants(request):
     
     all_loans = LoanApplication.objects.all()
@@ -51,6 +61,8 @@ def loanApplicants(request):
     return render(request, 'admin_dashboard/loan_applicants/all_loans.html', context)
 
 
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
 def viewApplication(request, pk):
     
     user_loan = LoanApplication.objects.get(id=pk)
@@ -68,3 +80,16 @@ def viewApplication(request, pk):
     }
     
     return render(request, 'admin_dashboard/loan_applicants/view_loan.html', context)
+
+
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
+def viewTransactions(request):
+    
+    all_transactions = Transaction.objects.all()
+    
+    context = {
+        'all_transactions':all_transactions
+    }
+    
+    return render(request, 'admin_dashboard/transactions/view.html', context)
