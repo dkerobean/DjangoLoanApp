@@ -134,7 +134,6 @@ def inbox(request):
         'all_messages':all_messages
     }
     
-    
     return render(request, 'admin_dashboard/inbox/all.html', context)
 
 
