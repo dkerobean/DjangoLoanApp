@@ -10,5 +10,10 @@ urlpatterns = [
     
     path('transaction/', views.viewTransactions, name="transactions"), 
     
-    path('edit_profile/<str:pk>/', views.editProfile, name="admin-profile"), 
+    path('edit_profile/<str:pk>/', views.editProfile, name="admin-profile"),
+    
+    path('inbox/', views.inbox, name="admin-inbox"),
+    path('inbox/read/<str:pk>/', views.viewMessage, name="admin-inbox-read"), 
+    
+    
 ]

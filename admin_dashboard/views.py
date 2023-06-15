@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from frontend.models import LoanApplication
-from user_dashboard.models import SavingsAccount, Transaction, Profile
+from user_dashboard.models import SavingsAccount, Transaction, Profile, Support
 from django.db.models import Sum, Count
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -37,13 +37,17 @@ def indexPage(request):
     #all users transactions
     user_transactions = Transaction.objects.all()[:6]
     
+    #get user messages 
+    all_messages = Support.objects.all()
+    
     
     context = {
         'formatted_deposit':formatted_deposit,
         'formatted_loans':formatted_loans, 
         'total_users':total_users, 
         'number_of_loans': number_of_loans, 
-        'user_transactions':user_transactions
+        'user_transactions':user_transactions, 
+        "all_messages": all_messages
     }
     
     return render(request, 'admin_dashboard/index.html', context)
@@ -118,3 +122,32 @@ def editProfile(request, pk):
     
     
     return render(request, 'admin_dashboard/profile/edit.html', context)
+
+
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
+def inbox(request):
+    
+    all_messages = Support.objects.all()
+    
+    context = {
+        'all_messages':all_messages
+    }
+    
+    
+    return render(request, 'admin_dashboard/inbox/all.html', context)
+
+
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
+def viewMessage(request, pk):
+    
+    message = Support.objects.get(id=pk)
+    all_messages = Support.objects.all()
+    
+    context = {
+        'message':message, 
+        'all_messages':all_messages
+    }
+    
+    return render(request, 'admin_dashboard/inbox/view.html', context)

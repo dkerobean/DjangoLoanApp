@@ -232,7 +232,7 @@
                   <div class="w-full pt-[66px] pb-[75px] relative">
                     <div class="w-full h-[66px] flex justify-between items-center absolute left-0 top-0 px-8">
                       <h3 class="text-xl text-bgray-900 font-bold">
-                        Message
+                        Messages
                       </h3>
                       <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -251,184 +251,37 @@
                           class="capitalize text-sm font-semibold flex space-x-2 px-6 py-4 border-b-2 border-success-300 text-success-300">
                           <span>All</span>
                           <span
-                            class="inline-block w-5 h-5 bg-success-50 flex justify-center items-center text-success-300 rounded-full text-[10px]">2</span>
+                            class="inline-block w-5 h-5 bg-success-50 flex justify-center items-center text-success-300 rounded-full text-[10px]">{{ all_messages.count }}</span>
                         </button>
                       </div>
-                      <ul class="w-full h-[335px] overflow-y-scroll scroll-style-1">
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
+                      <ul class="w-full h-[335px] overflow-y-scroll scroll-style-1"> 
+                        {% for message in all_messages %}
+                          <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
                           <a href="index-2.html#">
                             <div class="flex space-x-3">
                               <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-1.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
+                                <img class="object-cover rounded-full" src="{{ message.user.profile.profile_picture.url }}" alt="avatar" />
                                 <div
                                   class="w-3 h-3 rounded-full bg-bgray-300 border border-white absolute bottom-0 right-0">
                                 </div>
                               </div>
                               <div class="flex-1">
                                 <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Eusobio
+                                  {{ message.user.first_name}} {{ message.user.last_name}}
                                 </p>
                                 <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
+                                  {{ message.title }}
                                 </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
+                                <span class="text-sm font-medium text-bgray-500">{{ message.timestamp|timesince }} ago</span>
                               </div>
                             </div>
                           </a>
                         </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-2.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-success-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  Eusobio Joy
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-3.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-success-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Camaron
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-1.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-bgray-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Eusobio
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-2.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-success-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Eusobio
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-3.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-success-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Eusobio
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="py-6 px-7 hover:bg-bgray-100 border-b border-bgray-200">
-                          <a href="index-2.html#">
-                            <div class="flex space-x-3">
-                              <div class="w-[48px] h-[48px] rounded-full relative">
-                                <img src="{% static 'assets/images/avatar/inbox-1.png' %}" alt="avatar"
-                                  class="w-full h-full object-cover" />
-                                <div
-                                  class="w-3 h-3 rounded-full bg-bgray-300 border border-white absolute bottom-0 right-0">
-                                </div>
-                              </div>
-                              <div class="flex-1">
-                                <p class="font-bold text-base text-bgray-900 mb-1">
-                                  James Eusobio
-                                </p>
-                                <p class="text-sm font-medium text-bgray-500">
-                                  Hi, how are you? nedd help! .......
-                                </p>
-                                <span class="text-sm font-medium text-bgray-500">23 mins ago</span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
+                        {% endfor %}                                               
                       </ul>
                     </div>
 
-                    <div class="w-full h-[75px] flex justify-between items-center absolute left-0 bottom-0 px-8">
-                      <div>
-                        <a href="index-2.html#">
-                          <div class="flex space-x-2 items-center">
-                            <span>
-                              <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 6L11 11L21 1M1 6L6 11M11 6L16 1" stroke="#0CAF60" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                              </svg>
-                            </span>
-                            <span class="text-sm font-semibold text-success-300">
-                              Mark all as read
-                            </span>
-                          </div>
-                        </a>
-                      </div>
+                    <div class="w-full h-[75px] flex justify-between items-center absolute left-0 bottom-0 px-8">                     
                     </div>
                   </div>
                 </div>
