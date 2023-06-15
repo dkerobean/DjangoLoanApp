@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from frontend.models import LoanApplication
-from user_dashboard.models import SavingsAccount, Transaction
+from user_dashboard.models import SavingsAccount, Transaction, Profile
 from django.db.models import Sum, Count
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from .forms import UpdateProfileForm
 
 
 #check if user is staff
@@ -93,3 +94,27 @@ def viewTransactions(request):
     }
     
     return render(request, 'admin_dashboard/transactions/view.html', context)
+
+
+@login_required(login_url="user-login")
+@user_passes_test(is_admin)
+def editProfile(request, pk):
+    
+    user_profile = Profile.objects.get(id=pk)
+
+    form = UpdateProfileForm(instance=user_profile)
+
+    if request.method == "POST":
+        form = UpdateProfileForm(
+            request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile Updated")
+            return redirect('admin-dashboard')
+
+    context = {
+        'form': form
+    }
+    
+    
+    return render(request, 'admin_dashboard/profile/edit.html', context)
