@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from frontend.models import LoanApplication
-from user_dashboard.models import SavingsAccount, Transaction, Profile, Support
+from user_dashboard.models import SavingsAccount, Transaction, Profile, Support, MessageReply
 from django.db.models import Sum, Count
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -143,6 +143,14 @@ def viewMessage(request, pk):
     
     message = Support.objects.get(id=pk)
     all_messages = Support.objects.all()
+    
+    if request.method == "POST":
+        reply = request.POST.get('reply')
+        message_reply = MessageReply(support=message, reply_content=reply)
+        message_reply.save()
+        messages.success(request, 'Reply Sent')
+        return redirect('admin-inbox-read', message.id)
+        
     
     context = {
         'message':message, 
