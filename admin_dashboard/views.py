@@ -144,6 +144,9 @@ def viewMessage(request, pk):
     message = Support.objects.get(id=pk)
     all_messages = Support.objects.all()
     
+    all_replies = MessageReply.objects.all()
+    
+    #save reply to user message
     if request.method == "POST":
         reply = request.POST.get('reply')
         message_reply = MessageReply(support=message, reply_content=reply)
@@ -154,7 +157,8 @@ def viewMessage(request, pk):
     
     context = {
         'message':message, 
-        'all_messages':all_messages
+        'all_messages':all_messages, 
+        'all_replies':all_replies
     }
     
     return render(request, 'admin_dashboard/inbox/view.html', context)
