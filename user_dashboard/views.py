@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
-from .models import Profile, Support, Transaction, SavingsAccount
+from .models import Profile, Support, Transaction, SavingsAccount, MessageReply
 from frontend.models import LoanApplication
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -193,6 +193,7 @@ def support(request, pk):
     user_id = user.user.id
     user_instance = User.objects.get(id=user_id)
     
+    
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
     
@@ -207,8 +208,8 @@ def support(request, pk):
         return redirect('user-home', profile_id)
     
     context = {
-        'name':name,
-        'username':username
+        'name': name,
+        'username': username
     }
     
     return render(request, 'user_dashboard/support/support.html', context)
@@ -362,11 +363,14 @@ def userInbox(request, pk):
     #get user messages 
     user_messages = user_instance.support.all()
     
+    all_replies = MessageReply.objects.all()
+    
     context = {
         'user': user,
         'name': name,
         'username': username,
-        'user_messages':user_messages
+        'user_messages':user_messages, 
+        "all_replies":all_replies
     }
 
     return render(request, 'user_dashboard/inbox/inbox.html', context)
