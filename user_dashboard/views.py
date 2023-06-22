@@ -47,7 +47,7 @@ def indexPage(request, pk):
             
         }
         
-        messages.warning(request, 'Proceed to make payment')
+        messages.warning(request, 'Proceed 3to make payment')
         return render(request, 'user_dashboard/confirm_payment.html', context)
     
 
