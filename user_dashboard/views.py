@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
-from .models import Profile, Support, Transaction, SavingsAccount
+from .models import Profile, Support, Transaction, SavingsAccount, MessageReply
 from frontend.models import LoanApplication
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
 from django.conf import settings
 from django.db.models import Sum
+from decimal import Decimal
 
 
 
@@ -44,7 +45,6 @@ def indexPage(request, pk):
             'reference':reference, 
             'paystack_public_key': paystack_public_key,
             'user_id':user_id
-            
         }
         
         messages.warning(request, 'Proceed to make payment')
@@ -58,8 +58,14 @@ def indexPage(request, pk):
     user_loan_amount = LoanApplication.objects.filter(
         user=user_instance, status='approved').aggregate(Sum('amount'))['amount__sum']
     
+    if user_loan_amount is None:
+        user_loan_amount = 0.00
+    
     #Get user available balance 
-    current_balance = user_instance.savings_account.balance - user_loan_amount
+    if user_loan_amount is not None:
+        current_balance = user_instance.savings_account.balance - Decimal(user_loan_amount)
+    else:
+        current_balance = user_instance.savings_account.balance
     
     
     context = {
@@ -79,8 +85,12 @@ def indexPage(request, pk):
 
 def loginPage(request):
     
-    if request.user.is_authenticated:
-        return redirect('user-home')
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('admin-dashboard')
+    elif request.user.is_authenticated:
+        user_id = request.user.profile.id
+        return redirect('user-home', user_id)
+    
     
     if request.method == "POST":
         username = request.POST['username']
@@ -94,10 +104,20 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         
         if user is not None:
+            
+            #user has staff status
+            if user.is_staff:
+                login(request, user)
+                messages.success(request, 'Logged in succesfully')
+                user_id = request.user.profile.id
+                return redirect('admin-dashboard')
+            
+            #normal user without staff status
             login(request, user)
             messages.success(request, 'Logged in succesfully')
             user_id = request.user.profile.id
             return redirect('user-home', user_id)
+        
         else:
             messages.error(request, 'Username or Password incorrect')
             
@@ -116,7 +136,8 @@ def registerPage(request):
             user.save()
             messages.success(request, 'Account created successfuly')
             login(request, user)
-            return redirect('user-home')
+            user_id = request.user.profile.id
+            return redirect('user-home', user_id)
         
     context = {
         'form':form
@@ -172,6 +193,7 @@ def support(request, pk):
     user_id = user.user.id
     user_instance = User.objects.get(id=user_id)
     
+    
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
     
@@ -186,8 +208,8 @@ def support(request, pk):
         return redirect('user-home', profile_id)
     
     context = {
-        'name':name,
-        'username':username
+        'name': name,
+        'username': username
     }
     
     return render(request, 'user_dashboard/support/support.html', context)
@@ -341,11 +363,14 @@ def userInbox(request, pk):
     #get user messages 
     user_messages = user_instance.support.all()
     
+    all_replies = MessageReply.objects.all()
+    
     context = {
         'user': user,
         'name': name,
         'username': username,
-        'user_messages':user_messages
+        'user_messages':user_messages, 
+        "all_replies":all_replies
     }
 
     return render(request, 'user_dashboard/inbox/inbox.html', context)
