@@ -17,23 +17,23 @@ from decimal import Decimal
 
 
 @login_required(login_url="user-login")
-def indexPage(request, pk):
+def indexPage(request):
     
-    user = Profile.objects.get(id=pk)
+    #user = Profile.objects.get(id=pk)
     user_instance = request.user
     
-    name = f"{user.user.first_name} {user.user.last_name}"
-    username = user.user.username
+    name = f"{request.user.first_name} {request.user.last_name}"
+    username = request.user.username
     
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
     
     #Paystack Deposit money
     if request.method == "POST":
         amount = int(request.POST['amount'])
-        email = user.user.email
+        email = request.user.email
         transaction_type = 'Deposit'
         reference = generate_reference()
-        user_id = user.id
+        user_id = request.user.id
 
         # create a Transaction
         transaction = Transaction.objects.create(
@@ -69,8 +69,7 @@ def indexPage(request, pk):
     
     
     context = {
-        
-        'user':user, 
+         
         'name':name,
         'username':username,
         'user_transactions':user_transactions, 
