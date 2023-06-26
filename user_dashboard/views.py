@@ -87,8 +87,7 @@ def loginPage(request):
     if request.user.is_authenticated and request.user.is_staff:
         return redirect('admin-dashboard')
     elif request.user.is_authenticated:
-        user_id = request.user.profile.id
-        return redirect('user-home', user_id)
+        return redirect('user-home')
     
     
     if request.method == "POST":
@@ -114,8 +113,7 @@ def loginPage(request):
             #normal user without staff status
             login(request, user)
             messages.success(request, 'Logged in succesfully')
-            user_id = request.user.profile.id
-            return redirect('user-home', user_id)
+            return redirect('user-home')
         
         else:
             messages.error(request, 'Username or Password incorrect')
@@ -135,8 +133,7 @@ def registerPage(request):
             user.save()
             messages.success(request, 'Account created successfuly')
             login(request, user)
-            user_id = request.user.profile.id
-            return redirect('user-home', user_id)
+            return redirect('user-home')
         
     context = {
         'form':form
@@ -169,9 +166,8 @@ def edit_profile(request, pk):
         form = UpdateProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
-            messages.success(request, "Profile Updated")
-            user_id = request.user.profile.id
-            return redirect('user-home', user_id)
+            messages.success(request, "Profile Updated")            
+            return redirect('user-home')
         
         
     context = {
@@ -203,8 +199,7 @@ def support(request, pk):
         support_ticket = Support.objects.create(user=user_instance, title=title, description=description)
         support_ticket.save()
         messages.success(request, 'Ticket submited successfully')
-        profile_id = user.id
-        return redirect('user-home', profile_id)
+        return redirect('user-home')
     
     context = {
         'name': name,
@@ -239,10 +234,10 @@ def verifyPayment(request, reference, amount):
         
         transaction.save()
         messages.success(request, "Payment verified")
-        return redirect('user-home', profile_id)
+        return redirect('user-home')
     else:
         messages.error(request, "Payment not verified")
-        return redirect('user-home', profile_id)
+        return redirect('user-home')
     
     return render(request, 'user_dashboard/index.html')
 
