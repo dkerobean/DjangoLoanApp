@@ -24,9 +24,9 @@ def indexPage(request):
     formatted_deposit = "{:,.2f}".format(total_deposit)  # Format balance with commas
     
     #get sum of loans of users
-    total_loans = LoanApplication.objects.filter(
-        status='approved').aggregate(Sum('amount'))['amount__sum']
-    formatted_loans = "{:,.2f}".format(total_loans)
+    total_loans = LoanApplication.objects.filter(status='approved').aggregate(Sum('amount'))['amount__sum']
+    formatted_loans = "{:,.2f}".format(total_loans) if total_loans is not None else "0.00"
+
     
     #get total users
     total_users = User.objects.count()

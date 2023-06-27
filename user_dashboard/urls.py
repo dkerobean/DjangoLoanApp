@@ -14,7 +14,7 @@ urlpatterns = [
     
     path('support/<str:pk>/', views.support, name="user-support"),
     
-    path('verify_payment/<str:reference>/<int:amount>/', views.verifyPayment, name="verify-payment"),
+    path('verify_payment/<str:reference>/<int:amount>/<str:status>/', views.verifyPayment, name="verify-payment"),
     
     path('transactions/<str:pk>/', views.showTransactions, name="user-transactions"), 
     

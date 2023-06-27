@@ -40,12 +40,13 @@
                                 amount: "{{amount}}" * 100,
                                 currency: "GHS",
                                 ref: "{{reference}}",
+                                
                                 callback: function (response) {
                                     // Redirect to the user home URL
-                                    window.location.href = '{% url "verify-payment" reference amount %}';
+                                    window.location.href = '{% url "verify-payment" reference amount True %}';
                                 },
                                 onClose: function () {
-                                    window.location.href = '{% url "verify-payment" reference amount %}';
+                                    window.location.href = '{% url "verify-payment" reference amount False %}';
                                 },
                             });
 

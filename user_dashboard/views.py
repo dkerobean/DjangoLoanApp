@@ -212,7 +212,7 @@ def support(request, pk):
 """ PAYSTACK """
 
 @login_required(login_url="user-login")
-def verifyPayment(request, reference, amount):
+def verifyPayment(request, reference, amount, status):
     
     transaction = Transaction.objects.get(reference=reference)
     
@@ -225,7 +225,10 @@ def verifyPayment(request, reference, amount):
     # Get amount paid 
     amount_paid = amount
     
-    if transaction:
+    if status == "False":
+        messages.error(request, "Payment not verified")
+        return redirect('user-home')
+    else:
         transaction.verified = True 
         
         # add amount paid to users accoubt balance
@@ -235,10 +238,8 @@ def verifyPayment(request, reference, amount):
         transaction.save()
         messages.success(request, "Payment verified")
         return redirect('user-home')
-    else:
-        messages.error(request, "Payment not verified")
-        return redirect('user-home')
-    
+
+        
     return render(request, 'user_dashboard/index.html')
 
 
