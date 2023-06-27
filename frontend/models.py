@@ -58,4 +58,8 @@ class LoanApplication(models.Model):
     def __str__(self):
         return f"Loan Application - {self.user.username}"
     
+
+
+    
+    
     
