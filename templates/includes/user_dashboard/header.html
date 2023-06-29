@@ -81,7 +81,7 @@
                 <!--                author-->
                 <div onclick="profileAction()" class="flex lg:space-x-3 space-x-0 cursor-pointer">
                     <div class="w-[52px] h-[52px] rounded-xl border-bgray-300 overflow-hidden">
-                        <img class="object-cover w-10 h-10 rounded-full" src="{{ user.profile.profile_picture.url }}" alt="Avatar" />
+                        <img class="object-cover w-10 h-10 rounded-full" src="{{ request.user.profile.profile_picture.url }}" alt="Avatar" />
                     </div>
                     <div class="2xl:block hidden">
                         <div class="flex space-x-2.5 items-center">
