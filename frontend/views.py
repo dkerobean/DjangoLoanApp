@@ -26,21 +26,21 @@ def loanApplication(request):
 @login_required(login_url="user-login")
 def loanDetails(request):
     if request.method == "POST":
-            loan_type = request.POST.get("select-loan-type")
-            finance_type = request.POST.get("finance-type")
-            loan_amount = request.POST.get("loan-amount")
-            loan_duration = request.POST.get("loan-duration")
+        loan_type = request.POST.get("select-loan-type")
+        finance_type = request.POST.get("finance-type")
+        loan_amount = request.POST.get("loan-amount")
+        loan_duration = request.POST.get("loan-duration")
 
-            if loan_type and finance_type and loan_amount and loan_duration:
-                request.session['loan_details'] = {
-                    'loan_type': loan_type,
-                    'finance_type': finance_type,
-                    'loan_amount': loan_amount,
-                    'loan_duration': loan_duration
-                }
-                return redirect('personal-details')
-            else:
-                messages.error(request, "Please fill in all the fields.")
+        if loan_type and finance_type and loan_amount and loan_duration:
+            request.session['loan_details'] = {
+                'loan_type': loan_type,
+                'finance_type': finance_type,
+                'loan_amount': loan_amount,
+                'loan_duration': loan_duration
+            }
+            return redirect('personal-details')
+        else:
+            messages.error(request, "Please fill in all the fields.")
 
     return render(request, 'frontend/loan/loan_details.html')
 
