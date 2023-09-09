@@ -1,25 +1,27 @@
 from django.shortcuts import render, redirect
-from .forms import ContactForm 
+from .forms import ContactForm
 from django.contrib import messages
 from .models import LoanApplication
 from django.contrib.auth.decorators import login_required
 
 
-
 def indexPage(request):
-    
+
     return render(request, 'frontend/index.html')
+
 
 """ LOAN """
 
+
 def getLoan(request):
-    
+
     return render(request, 'frontend/loan/get_loan.html')
 
 
 def loanApplication(request):
-    
+
     return render(request, 'frontend/loan/loan_application')
+
 
 @login_required(login_url="user-login")
 def loanDetails(request):
@@ -45,7 +47,7 @@ def loanDetails(request):
 
 @login_required(login_url="user-login")
 def personalDetails(request):
-    
+
     if request.method == "POST":
         dob = request.POST.get('dob')
         marital_status = request.POST.get('marital-status')
@@ -54,7 +56,9 @@ def personalDetails(request):
         city = request.POST.get('city')
         postal_code = request.POST.get('postal-code')
 
-        if dob and marital_status and mobile_number and address and city and postal_code:
+        if dob and marital_status and \
+           mobile_number and address and \
+           city and postal_code:
             request.session['personal_details'] = {
                 'dob': dob,
                 'marital_status': marital_status,
@@ -65,16 +69,16 @@ def personalDetails(request):
             }
             return redirect('document-upload')
         else:
-            messages.error(request, "Please fill in all the fields.")  
+            messages.error(request, "Please fill in all the fields.")
 
     return render(request, 'frontend/loan/personal_details.html')
 
 
 @login_required(login_url="user-login")
 def documentUpload(request):
-    
+
     if request.method == "POST":
-        
+
         id_proof = request.FILES.get('id-proof')
 
         # Get previous data from session
@@ -108,29 +112,26 @@ def documentUpload(request):
             return redirect('index-page')
         else:
             messages.error(request, "Please fill in all the required details.")
-    
-        
-   
 
     return render(request, 'frontend/loan/document_upload.html')
 
 
-
 """ CONTACT """
 
+
 def contact(request):
-    
+
     form = ContactForm()
-    
+
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Message Sent!')
             return redirect('index-page')
-        
+
     context = {
-        'form':form
+        'form': form
     }
-    
+
     return render(request, 'frontend/contact.html', context)

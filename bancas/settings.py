@@ -37,16 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'frontend.apps.FrontendConfig', 
+
+    'frontend.apps.FrontendConfig',
     'user_dashboard.apps.UserDashboardConfig',
     'admin_dashboard.apps.AdminDashboardConfig',
-    
+
     'social_django',
     'allauth',
     'allauth.account',
     'paystack'
-    
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
@@ -78,8 +78,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                
-                'social_django.context_processors.backends', 
+
+                'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
         },
@@ -87,15 +87,14 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    
-    
+
+
+
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-    
 
-    
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 WSGI_APPLICATION = 'bancas.wsgi.application'
@@ -158,7 +157,6 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
 
-LOGIN_REDIRECT_URL = 'user-home'
 
 
 # Default primary key field type
@@ -167,7 +165,7 @@ LOGIN_REDIRECT_URL = 'user-home'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = '1272975949976929' 
+SOCIAL_AUTH_FACEBOOK_KEY = '1272975949976929'
 SOCIAL_AUTH_FACEBOOK_SECRET = '3d9a83f9d25d3274735b9c4ee8079fb4'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '423067094344-7darv1in5lqlfnsb5m9nbf2gv0ql948g.apps.googleusercontent.com'
