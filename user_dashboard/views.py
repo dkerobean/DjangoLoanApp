@@ -13,12 +13,13 @@ from django.conf import settings
 from django.db.models import Sum
 from decimal import Decimal
 from urllib.parse import urlparse
+from django.contrib.auth import get_user_model
 
 
 @login_required(login_url="user-login")
 def indexPage(request):
 
-    #user = Profile.objects.get(id=pk)
+    # user = Profile.objects.get(id=pk)
     user_instance = request.user
 
     name = f"{request.user.first_name} {request.user.last_name}"
@@ -26,7 +27,7 @@ def indexPage(request):
 
     paystack_public_key = settings.PAYSTACK_PUBLIC_KEY
 
-    #Paystack Deposit money
+    # Paystack Deposit money
     if request.method == "POST":
         amount = int(request.POST['amount'])
         email = request.user.email
@@ -50,7 +51,7 @@ def indexPage(request):
         return render(request, 'user_dashboard/confirm_payment.html', context)
 
 
-    #Get all user transactions
+    # Get all user transactions
     user_transactions = user_instance.transactions.all()[:4]
 
     # get user loan amount of approved loans
@@ -60,7 +61,7 @@ def indexPage(request):
     if user_loan_amount is None:
         user_loan_amount = 0.00
 
-    #Get user available balance
+    # Get user available balance
     if user_loan_amount is not None:
         current_balance = user_instance.savings_account.balance - Decimal(user_loan_amount)
     else:
@@ -80,6 +81,8 @@ def indexPage(request):
 
 
 """ AUTH """
+user = get_user_model()
+user.backend = 'django.contrib.auth.backends.ModelBackend'
 
 def loginPage(request):
 
@@ -147,6 +150,7 @@ def registerPage(request):
 def logout(request):
 
     auth_logout(request)
+    messages.success(request, 'Logout Successfully')
     return redirect('index-page')
 
     return render(request, 'user_dashboard/auth/login.html')
