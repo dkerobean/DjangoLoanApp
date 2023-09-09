@@ -113,7 +113,7 @@
                                             <span class="title">Where do you currently live?</span>
                                             <div class="select-location d-flex align-items-center"
                                                 id="locationSlectParent">
-                                                <select class="w-100" name="select-location" id="locationSelect">                                                
+                                                <select class="w-100" name="select-location" id="locationSelect">
                                                     <option value="Sylhet">Ghana</option>
                                                     <option value="Tangail">Nigeria</option>
                                                     <option value="Teknaf">Togo</option>
@@ -127,17 +127,17 @@
                                     </div>
                                 </div> {% endcomment %}
 
-                                <div class="col-12 mt-15 d-flex wow fadeInLeft">
-                                    <div class="icon">
+                                <div class="col-12 mt-10 d-flex wow fadeInLeft">
+                                    {% comment %} <div class="icon">
                                         <img class="img=fluid" src="{% static 'img/steps/sheild.png' %}" alt="sheild">
-                                    </div>
-                                    <p class="security-info d-inline-block ms-2">
+                                    </div> {% endcomment %}
+                                    {% comment %} <p class="security-info d-inline-block ms-2 text-center">
                                         Your information is 100% secure. We do not share your info with other
                                         parties.
-                                    </p>
+                                    </p> {% endcomment %}
                                 </div>
 
-                                <div class="col-12 text-center mt-35">
+                                <div class="col-12 text-center mt-15">
                                     <button class="theme-btn theme-btn-lg wow fadeInUp" type="submit">
                                         apply now <i class="arrow_right"></i>
                                     </button>
@@ -404,6 +404,5 @@
         </section>
         <!-- Testimonial end -->
     </main>
-    
+
 {% endblock content %}
-    
