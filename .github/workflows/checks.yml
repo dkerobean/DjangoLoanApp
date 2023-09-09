@@ -1,0 +1,15 @@
+# .github/workflows/checks.yml
+name: Checks
+
+on: [push]
+
+jobs:
+  flake8:
+    name: Flake8
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run flake8
+        run: |
+          flake8
