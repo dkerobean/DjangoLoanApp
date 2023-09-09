@@ -1,42 +1,33 @@
 $(function () {
   //search
   $(document).on("keydown", (e) => {
-    switch (e.key) {
-      case "j":
-      case "Control":
-        e.preventDefault();
-        e.stopPropagation();
-        break;
-    }
-    ``;
     if (e.key === "j" && e.ctrlKey) {
+      e.preventDefault();
+      e.stopPropagation();
       $("#search").trigger("focus");
     }
   });
+
   //drawer
   $(".drawer-btn").on("click", () => {
-    const checkClassExits = $(".layout-wrapper");
-    if (checkClassExits.hasClass("active")) {
-      checkClassExits.removeClass("active");
+    const checkClassExists = $(".layout-wrapper");
+    if (checkClassExists.hasClass("active")) {
+      checkClassExists.removeClass("active");
     } else {
-      checkClassExits.addClass("active");
+      checkClassExists.addClass("active");
     }
   });
+
   //drawer key access
   $(document).on("keydown", (e) => {
-    switch (e.key) {
-      case "l":
-      case "Control":
-        e.preventDefault();
-        e.stopPropagation();
-        break;
-    }
     if (e.key === "l" && e.ctrlKey) {
-      const checkClassExits = $(".layout-wrapper");
-      if (checkClassExits.hasClass("active")) {
-        checkClassExits.removeClass("active");
+      e.preventDefault();
+      e.stopPropagation();
+      const checkClassExists = $(".layout-wrapper");
+      if (checkClassExists.hasClass("active")) {
+        checkClassExists.removeClass("active");
       } else {
-        checkClassExits.addClass("active");
+        checkClassExists.addClass("active");
       }
     }
   });
