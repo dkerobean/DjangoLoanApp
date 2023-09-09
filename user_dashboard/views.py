@@ -6,13 +6,11 @@ from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, UpdateProfileForm
 from .models import Profile, Support, Transaction, SavingsAccount, MessageReply
 from frontend.models import LoanApplication
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .utils import generate_reference
 from django.conf import settings
 from django.db.models import Sum
 from decimal import Decimal
-from urllib.parse import urlparse
 from django.contrib.auth import get_user_model
 
 
@@ -37,52 +35,56 @@ def indexPage(request):
 
         # create a Transaction
         transaction = Transaction.objects.create(
-            user=user_instance, amount=amount, transaction_type=transaction_type, reference=reference)
+            user=user_instance, amount=amount,
+            transaction_type=transaction_type, reference=reference)
 
         context = {
-            'amount':amount,
-            'email':email,
-            'reference':reference,
+            'amount': amount,
+            'email': email,
+            'reference': reference,
             'paystack_public_key': paystack_public_key,
-            'user_id':user_id
+            'user_id': user_id,
+            'transaction': transaction
         }
 
         messages.warning(request, 'Proceed to make payment')
         return render(request, 'user_dashboard/confirm_payment.html', context)
 
-
     # Get all user transactions
     user_transactions = user_instance.transactions.all()[:4]
 
     # get user loan amount of approved loans
-    user_loan_amount = LoanApplication.objects.filter(
-        user=user_instance, status='approved').aggregate(Sum('amount'))['amount__sum']
+    approved_loans = LoanApplication.objects.filter(
+        user=user_instance, status='approved')
+    user_loan_amount = approved_loans.aggregate(Sum('amount'))['amount__sum']
 
     if user_loan_amount is None:
         user_loan_amount = 0.00
 
     # Get user available balance
     if user_loan_amount is not None:
-        current_balance = user_instance.savings_account.balance - Decimal(user_loan_amount)
+        current_balance = user_instance.savings_account.balance \
+                        - Decimal(user_loan_amount)
     else:
         current_balance = user_instance.savings_account.balance
 
-
     context = {
-
-        'name':name,
-        'username':username,
-        'user_transactions':user_transactions,
+        'name': name,
+        'username': username,
+        'user_transactions': user_transactions,
         'user_loan_amount': user_loan_amount,
-        'current_balance':current_balance
+        'current_balance': current_balance
     }
 
     return render(request, 'user_dashboard/index.html', context)
 
 
 """ AUTH """
+
+
 user = get_user_model()
 user.backend = 'django.contrib.auth.backends.ModelBackend'
+
 
 def loginPage(request):
 
@@ -91,25 +93,22 @@ def loginPage(request):
     elif request.user.is_authenticated:
         return redirect('user-home')
 
-
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
 
         try:
             user = User.objects.get(username=username)
-        except:
+        except User.DoesNotExist:
             messages.error(request, 'Username does not exists')
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-
             # user has staff status
             if user.is_staff:
                 login(request, user)
                 messages.success(request, 'Logged in succesfully')
-                user_id = request.user.profile.id
                 return redirect('admin-dashboard')
 
             # normal user without staff status
@@ -118,10 +117,8 @@ def loginPage(request):
 
             return redirect(request.GET.get('next', 'user-home'))
 
-
         else:
             messages.error(request, 'Username or Password incorrect')
-
 
     return render(request, 'user_dashboard/auth/login.html')
 
@@ -140,7 +137,7 @@ def registerPage(request):
             return redirect('user-home')
 
     context = {
-        'form':form
+        'form': form
     }
 
     return render(request, 'user_dashboard/auth/register.html', context)
@@ -158,6 +155,7 @@ def logout(request):
 
 """ PROFILE """
 
+
 @login_required(login_url="user-login")
 def edit_profile(request, pk):
 
@@ -174,11 +172,10 @@ def edit_profile(request, pk):
             messages.success(request, "Profile Updated")
             return redirect('user-home')
 
-
     context = {
-        'form':form,
-        'name':name,
-        'username':username
+        'form': form,
+        'name': name,
+        'username': username
     }
 
     return render(request, 'user_dashboard/profile/edit_profile.html', context)
@@ -186,13 +183,13 @@ def edit_profile(request, pk):
 
 """ SUPPORT """
 
+
 @login_required(login_url="user-login")
 def support(request, pk):
 
     user = Profile.objects.get(id=pk)
     user_id = user.user.id
     user_instance = User.objects.get(id=user_id)
-
 
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
@@ -216,13 +213,13 @@ def support(request, pk):
 
 """ PAYSTACK """
 
+
 @login_required(login_url="user-login")
 def verifyPayment(request, reference, amount, status):
 
     transaction = Transaction.objects.get(reference=reference)
 
     user = request.user
-    profile_id = user.profile.id
 
     # Get users account
     user_account = SavingsAccount.objects.get(user=user)
@@ -244,11 +241,11 @@ def verifyPayment(request, reference, amount, status):
         messages.success(request, "Payment verified")
         return redirect('user-home')
 
-
     return render(request, 'user_dashboard/index.html')
 
 
 """ TRANSACTIONS """
+
 
 @login_required(login_url="user-login")
 def showTransactions(request, pk):
@@ -266,13 +263,14 @@ def showTransactions(request, pk):
         'user': user,
         'name': name,
         'username': username,
-        'user_transactions':user_transactions
+        'user_transactions': user_transactions
     }
 
     return render(request, 'user_dashboard/transactions/transaction.html', context)
 
 
 """ WALLET """
+
 
 @login_required(login_url="user-login")
 def myWallet(request, pk):
@@ -283,10 +281,10 @@ def myWallet(request, pk):
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
 
-    #Get user acount balance
+    # Get user acount balance
     user_account = SavingsAccount.objects.get(user=user_instance)
 
-    #Get user transactions
+    # Get user transactions
     user_transactions = user_instance.transactions.all()[:5]
 
     # Paystack Deposit money
@@ -302,7 +300,8 @@ def myWallet(request, pk):
 
         # create a Transaction
         transaction = Transaction.objects.create(
-            user=user_instance, amount=amount, transaction_type=transaction_type, reference=reference)
+            user=user_instance, amount=amount,
+            transaction_type=transaction_type, reference=reference)
 
         context = {
             'amount': amount,
@@ -319,14 +318,16 @@ def myWallet(request, pk):
         'user': user,
         'name': name,
         'username': username,
-        'user_account':user_account,
-        'user_transactions':user_transactions
+        'user_account': user_account,
+        'user_transactions': user_transactions,
+        'transaction': transaction
     }
 
     return render(request, 'user_dashboard/wallet/wallet.html', context)
 
 
 """ LOANS """
+
 
 @login_required(login_url="user-login")
 def userLoans(request, pk):
@@ -337,20 +338,21 @@ def userLoans(request, pk):
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
 
-    #Get user's loan
+    # Get user's loan
     user_loan = user_instance.loans.all()
-
 
     context = {
         'user': user,
         'name': name,
         'username': username,
-        'user_loan':user_loan
+        'user_loan': user_loan
     }
 
     return render(request, 'user_dashboard/loans/loan.html', context)
 
+
 """ INBOX """
+
 
 def userInbox(request, pk):
 
@@ -360,7 +362,7 @@ def userInbox(request, pk):
     name = f"{user.user.first_name} {user.user.last_name}"
     username = user.user.username
 
-    #get user messages
+    # get user messages
     user_messages = user_instance.support.all()
 
     all_replies = MessageReply.objects.all()
@@ -369,9 +371,8 @@ def userInbox(request, pk):
         'user': user,
         'name': name,
         'username': username,
-        'user_messages':user_messages,
-        "all_replies":all_replies
+        'user_messages': user_messages,
+        "all_replies": all_replies
     }
 
     return render(request, 'user_dashboard/inbox/inbox.html', context)
-
