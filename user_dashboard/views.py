@@ -166,7 +166,8 @@ def edit_profile(request, pk):
     form = UpdateProfileForm(instance=user_profile)
 
     if request.method == "POST":
-        form = UpdateProfileForm(request.POST, request.FILES, instance=user_profile)
+        form = UpdateProfileForm(request.POST, request.FILES,
+                                 instance=user_profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile Updated")
@@ -198,7 +199,9 @@ def support(request, pk):
         title = request.POST['title']
         description = request.POST['description']
 
-        support_ticket = Support.objects.create(user=user_instance, title=title, description=description)
+        support_ticket = Support.objects.create(user=user_instance,
+                                                title=title,
+                                                description=description)
         support_ticket.save()
         messages.success(request, 'Ticket submited successfully')
         return redirect('user-home')
@@ -266,7 +269,9 @@ def showTransactions(request, pk):
         'user_transactions': user_transactions
     }
 
-    return render(request, 'user_dashboard/transactions/transaction.html', context)
+    return render(request, 'user_dashboard/transactions/transaction.html',
+                  context
+                  )
 
 
 """ WALLET """
