@@ -17,6 +17,9 @@ from django.contrib.auth import get_user_model
 @login_required(login_url="user-login")
 def indexPage(request):
 
+    user = request.user
+    user_replies = MessageReply.objects.filter(support__user=user)
+
     # user = Profile.objects.get(id=pk)
     user_instance = request.user
 
@@ -44,7 +47,8 @@ def indexPage(request):
             'reference': reference,
             'paystack_public_key': paystack_public_key,
             'user_id': user_id,
-            'transaction': transaction
+            'transaction': transaction,
+            'user_replies': user_replies
         }
 
         messages.warning(request, 'Proceed to make payment')
