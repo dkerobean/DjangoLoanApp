@@ -269,8 +269,8 @@ def showTransactions(request, pk):
         'user_transactions': user_transactions
     }
 
-    return render(request, 'user_dashboard/transactions/transaction.html',
-                  context
+    return render(
+        request, 'user_dashboard/transactions/transaction.html', context
                   )
 
 
