@@ -308,7 +308,7 @@ def myWallet(request, pk):
         user_id = user.id
 
         # create a Transaction
-        transaction = Transaction.objects.create(
+        transaction = Transaction.objects.create(    # noqa
             user=user_instance, amount=amount,
             transaction_type=transaction_type, reference=reference)
 
@@ -329,7 +329,6 @@ def myWallet(request, pk):
         'username': username,
         'user_account': user_account,
         'user_transactions': user_transactions,
-        'transaction': transaction
     }
 
     return render(request, 'user_dashboard/wallet/wallet.html', context)
