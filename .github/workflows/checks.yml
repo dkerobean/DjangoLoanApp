@@ -28,7 +28,6 @@ jobs:
       - name: Set up database
         run: |
           python manage.py migrate
-          python manage.py collectstatic --noinput
 
       - name: Run tests
         run: |
