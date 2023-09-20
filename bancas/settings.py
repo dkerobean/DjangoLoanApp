@@ -174,4 +174,5 @@ PAYSTACK_SECRET_KEY = 'sk_test_4e5aebb91025fae9010955aecdee4a0633690fb2'
 PAYSTACK_PUBLIC_KEY = 'pk_test_5d771c071afa4a41656e20bc1780d18fdc05d728'
 # PAYSTACK_PAYMENT_URL = 'https://api.paystack.co'
 
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
 
