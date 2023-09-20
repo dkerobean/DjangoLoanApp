@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   flake8:
-    name: Flake8
+    name: Test and Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
