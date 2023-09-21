@@ -4,6 +4,9 @@ FROM python:3.11.1-alpine
 # set work directory
 WORKDIR /usr/src/app
 
+# Install system dependencies (including gcc)
+RUN apk update && apk add --no-cache build-base libffi-dev openssl-dev
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
